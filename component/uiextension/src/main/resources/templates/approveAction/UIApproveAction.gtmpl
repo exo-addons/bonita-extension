@@ -1,0 +1,102 @@
+<style>
+.UIOptionBlockPanel table {
+    border: 1px solid white !important;
+}
+.UIJCRExplorerPortlet {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid white;
+	padding:0px !important;
+}
+.message_ok {
+	color: #5D5D5D;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: center;
+	padding-top: 5px;
+}
+.message_ko {
+	color: red;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: center;
+	padding-top: 5px;
+}
+.titre {
+	text-align: center;
+	padding-top: 10px;
+	color: #666666;
+	font-weight: bold;
+	line-height: 24px;
+	overflow: hidden;
+	padding-left: 4px;
+	white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .UISideBar #ApproveAction .SideBarContent {
+    border-bottom: 1px solid #E1E1E1;
+}
+
+
+.ApproveAction a {
+    color: #226AB4;
+    display: block;
+    font-size: 12px;
+    line-height: 20px;
+    margin-left: 10px;
+    padding: 0 15px 0 27px;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+</style>
+
+<%
+	String commentLabel = _ctx.appRes(uicomponent.getName() + ".action." + "GetComment") ;
+	String commentLink = uicomponent.event("GetComment") ;
+%>
+
+<div class="UIJCRExplorerPortlet">
+<div class="UISideBar">
+<div id="ApproveAction">
+<div class="SideBarContent">
+	<div class="BarContent">
+		<div class="Title" style="float:left;">Publication</div>
+			
+	</div>
+	<div class="SideContent" style="height: 100%; min-height: 75px;">
+		<div class="titre"><%= _ctx.appRes(uicomponent.getName() + ".state.label")%><%= _ctx.appRes(uicomponent.getName() + ".state." + uicomponent.getState())%></div>
+	
+	
+	<%
+	for(msg in uicomponent.getMessages()) {
+		String msgLabel = _ctx.appRes(uicomponent.getName() + ".msg." + msg) ;
+		String msgstyle="message_"+msg;
+		String msgimage="/bonita-extension/skin/images/mail_"+msg+".png";
+	%>
+		<div id="message" class="$msgstyle"><img src="$msgimage">&nbsp;$msgLabel</img></div>
+	<%}%>
+
+		
+						<% if(uicomponent.getMessages()==null){
+						    for(action in uicomponent.getAllowedActions()) { 
+							String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+							String link = uicomponent.event(action) ;
+						%>
+						<div class="UIAction"> 
+			
+				
+					     <div>
+						<div onclick="$link" class="ApproveAction">
+							
+								  <a href="javascript:void(0);"><img src="/ecmexplorer/skin/icons/24x24/DefaultSkin/ManagerPuplication.png">$actionLabel</img></a>
+								
+						</div>
+						</div> 
+				
+		          </div>
+					<%}}%>        
+					
+</div>		
+</div>
+</div>
+</div>
+</div>

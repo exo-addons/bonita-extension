@@ -1,0 +1,96 @@
+
+.Validation_Verification_Row2{
+	height:0px;
+
+}
+
+.Validation_Verification_td_Verified{
+	text-align:center;
+
+}
+
+.widget_Validation_Verification_Auditor_Comment{
+
+}
+
+.input_Validation_Verification_Auditor_Comment{
+	 width : 400px;
+
+}
+
+.label_Validation_Verification_Auditor_Comment{
+
+}
+
+.table_Validation_Verification_Auditor_Comment{
+
+}
+
+.table_cells_Validation_Verification_Auditor_Comment{
+
+}
+
+.table_headers_Validation_Verification_Auditor_Comment{
+
+}
+
+.image_Validation_Verification_Auditor_Comment{
+
+}
+
+.Publication_Validation_Row2{
+	height:0px;
+
+}
+
+.Publication_Validation_Row3{
+	height:0px;
+
+}
+
+.Publication_Validation_td_Soumettre1{
+	text-align:center;
+
+}
+
+.Publication_Validation_td_Verify{
+	text-align:center;
+
+}
+
+.widget_Publication_Validation_Motif{
+
+}
+
+.input_Publication_Validation_Motif{
+	 width : 400px;
+
+}
+
+.label_Publication_Validation_Motif{
+
+}
+
+.table_Publication_Validation_Motif{
+
+}
+
+.table_cells_Publication_Validation_Motif{
+
+}
+
+.table_headers_Publication_Validation_Motif{
+
+}
+
+.image_Publication_Validation_Motif{
+
+}
+
+.bonita_table_container {
+	table-layout: fixed;
+}
+
+.hidden_on_instantiation {
+	display: none;
+}

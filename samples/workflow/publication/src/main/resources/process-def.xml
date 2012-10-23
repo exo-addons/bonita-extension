@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process-definition product-version="5.7">
+  <process name="PublicationProcess" version="1.0">
+    <label>PublicationProcess</label>
+    <description/>
+    <type>PROCESS</type>
+    <participants>
+      <participant name="mary"/>
+      <participant name="james"/>
+    </participants>
+    <data-fields>
+      <data-field name="href">
+        <label>href</label>
+        <value>rO0ABXA=</value>
+        <description/>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <scripting-value>${System.getProperty ("org.exoplatform.runtime.conf.cas.server.name")+"/portal/private/intranet/editor?"+"backto=/portal/private/intranet/bonitaXP"+"&amp;path="}</scripting-value>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="approve">
+        <label>approve</label>
+        <value>rO0ABXQAAk5P</value>
+        <description/>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values>
+          <enumeration-value>YES</enumeration-value>
+          <enumeration-value>NO</enumeration-value>
+        </enumeration-values>
+      </data-field>
+      <data-field name="commentaires">
+        <label>commentaires</label>
+        <value>rO0ABXQADE5vIENvbW1lbnRzLg==</value>
+        <description>les Commentaires de publisher et le vérificateur</description>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="link">
+        <label>link</label>
+        <value>rO0ABXA=</value>
+        <description/>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+    </data-fields>
+    <attachments/>
+    <activities>
+      <activity name="PublishDocument">
+        <label>PublishDocument</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors>
+          <connector>
+            <classname>PublicationConnector</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setPath">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+              <parameter name="setStatus">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAlwdWJsaXNoZWQ=</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>SendMail</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setCommentaires">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke2NvbW1lbnRh
+aXJlc30=</parameter>
+              <parameter name="setUserName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACEke3Byb2Nlc3NJ
+bnN0YW5jZS5nZXRTdGFydGVkQnkoKX0=</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>BonitaLifeCycle</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setInlife">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAVmYWxzZQ==</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Publication">
+        <label>Publication</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>mary</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>PublicationConnector</classname>
+            <description/>
+            <event>taskOnReady</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setPath">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+              <parameter name="setStatus">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAhhcHByb3ZlZA==</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>AddComment</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setCommentaires">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke2NvbW1lbnRh
+aXJlc30=</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Debut1">
+        <label>Début1</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Fin1">
+        <label>Fin1</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>true</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="ActivityStream">
+        <label>ActivityStream</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors>
+          <connector>
+            <classname>ActivityDocumentPublished</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Validation">
+        <label>Validation</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>james</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>PublicationConnector</classname>
+            <description/>
+            <event>taskOnReady</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setPath">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+              <parameter name="setStatus">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAdwZW5kaW5n</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>AddComment</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setCommentaires">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke2NvbW1lbnRh
+aXJlc30=</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>BonitaLifeCycle</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setLink">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAcke2xpbmt9</parameter>
+              <parameter name="setInlife">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAR0cnVl</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+    </activities>
+    <transitions>
+      <transition name="ActivityStream__Fin1">
+        <description/>
+        <from>ActivityStream</from>
+        <to>Fin1</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Debut1__Validation">
+        <description/>
+        <from>Debut1</from>
+        <to>Validation</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Validation__Publication">
+        <description/>
+        <from>Validation</from>
+        <to>Publication</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="PublishDocument__ActivityStream">
+        <description/>
+        <from>PublishDocument</from>
+        <to>ActivityStream</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Publication__PublishDocument">
+        <label>Approval.YES</label>
+        <condition>import PublicationProcess_1_0.Approval;&#13;
+&#13;
+approve==Approval.YES</condition>
+        <description/>
+        <from>Publication</from>
+        <to>PublishDocument</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Publication__Validation">
+        <label>Approval.NO</label>
+        <condition>import PublicationProcess_1_0.Approval;&#13;
+&#13;
+approve==Approval.NO</condition>
+        <description/>
+        <from>Publication</from>
+        <to>Validation</to>
+        <is-default>false</is-default>
+      </transition>
+    </transitions>
+    <connectors/>
+    <categories/>
+    <event-sub-processes/>
+  </process>
+</process-definition>

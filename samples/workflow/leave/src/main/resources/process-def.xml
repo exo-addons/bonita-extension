@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process-definition product-version="5.7">
+  <process name="Leave_Application" version="1.0">
+    <label>Leave Application</label>
+    <description/>
+    <type>PROCESS</type>
+    <participants>
+      <participant name="ManagerGroup">
+        <label>ManagerGroup</label>
+        <description/>
+        <role-mapper>
+          <classname>org.bonitasoft.connectors.bonita.resolvers.UserListRoleResolver</classname>
+          <parameters>
+            <parameter name="setUsers">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAphZG1pbixyb290
+</parameter>
+          </parameters>
+        </role-mapper>
+      </participant>
+      <participant name="Initiateur">
+        <label>Initiateur</label>
+        <description>Personne qui prend la première action pour démarrer le processus</description>
+        <role-mapper>
+          <classname>org.bonitasoft.connectors.bonita.resolvers.ProcessInitiatorRoleResolver</classname>
+          <parameters/>
+        </role-mapper>
+      </participant>
+      <participant name="Administrator">
+        <label>Administrator</label>
+        <description/>
+        <role-mapper>
+          <classname>org.bonitasoft.connectors.bonita.resolvers.UserListRoleResolver</classname>
+          <parameters>
+            <parameter name="setUsers">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AARqb2hu</parameter>
+          </parameters>
+        </role-mapper>
+      </participant>
+    </participants>
+    <data-fields>
+      <data-field name="return_Date">
+        <label>Return Date</label>
+        <value>rO0ABXA=</value>
+        <description/>
+        <datatype-classname>java.util.Date</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="user">
+        <label>user</label>
+        <value>rO0ABXA=</value>
+        <description>user</description>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="release_Date">
+        <label>Release Date</label>
+        <value>rO0ABXA=</value>
+        <description/>
+        <datatype-classname>java.util.Date</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pattern">
+        <label>Pattern</label>
+        <value>rO0ABXA=</value>
+        <description/>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+    </data-fields>
+    <attachments/>
+    <activities>
+      <activity name="Debut1">
+        <label>Début1</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Accept">
+        <label>Accept</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors>
+          <connector>
+            <classname>org.bonitasoft.connectors.activitystream.ActivityStream</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setProcessName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AB4ke3Byb2Nlc3NE
+ZWZpbml0aW9uLmdldE5hbWUoKX0=</parameter>
+              <parameter name="setActivityName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACUke2FjdGl2aXR5
+SW5zdGFuY2UuZ2V0QWN0aXZpdHlOYW1lKCl9</parameter>
+              <parameter name="setLoggedUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Reject">
+        <label>Reject</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors>
+          <connector>
+            <classname>org.bonitasoft.connectors.activitystream.ActivityStream</classname>
+            <description/>
+            <event>automaticOnExit</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setProcessName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AB4ke3Byb2Nlc3NE
+ZWZpbml0aW9uLmdldE5hbWUoKX0=</parameter>
+              <parameter name="setActivityName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACUke2FjdGl2aXR5
+SW5zdGFuY2UuZ2V0QWN0aXZpdHlOYW1lKCl9</parameter>
+              <parameter name="setLoggedUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Leave_Application_Submission">
+        <label>Leave Application Submission</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>Initiateur</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>org.bonitasoft.connectors.activitystream.ActivityStream</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setProcessName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AB8ke3Byb2Nlc3NE
+ZWZpbml0aW9uLmdldExhYmVsKCl9</parameter>
+              <parameter name="setActivityName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACYke2FjdGl2aXR5
+SW5zdGFuY2UuZ2V0QWN0aXZpdHlMYWJlbCgpfQ==</parameter>
+              <parameter name="setLoggedUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Administrator_Approval">
+        <label>Administrator Approval</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>Administrator</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>org.bonitasoft.connectors.activitystream.ActivityStream</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setProcessName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AB4ke3Byb2Nlc3NE
+ZWZpbml0aW9uLmdldE5hbWUoKX0=</parameter>
+              <parameter name="setActivityName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACUke2FjdGl2aXR5
+SW5zdGFuY2UuZ2V0QWN0aXZpdHlOYW1lKCl9</parameter>
+              <parameter name="setLoggedUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields>
+          <data-field name="decision">
+            <label>decision</label>
+            <value>rO0ABXQAAA==</value>
+            <description/>
+            <datatype-classname>java.lang.String</datatype-classname>
+            <is-transient>false</is-transient>
+            <enumeration-values>
+              <enumeration-value>yes</enumeration-value>
+              <enumeration-value>no</enumeration-value>
+            </enumeration-values>
+          </data-field>
+        </data-fields>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Manager_s_Approval">
+        <label>Manager's Approval</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>ManagerGroup</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>org.bonitasoft.connectors.activitystream.ActivityStream</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="setProcessName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AB4ke3Byb2Nlc3NE
+ZWZpbml0aW9uLmdldE5hbWUoKX0=</parameter>
+              <parameter name="setActivityName">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ACUke2FjdGl2aXR5
+SW5zdGFuY2UuZ2V0QWN0aXZpdHlOYW1lKCl9</parameter>
+              <parameter name="setLoggedUser">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke2xvZ2dlZFVz
+ZXJ9</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields>
+          <data-field name="decision">
+            <label>decision</label>
+            <value>rO0ABXQAAA==</value>
+            <description/>
+            <datatype-classname>java.lang.String</datatype-classname>
+            <is-transient>false</is-transient>
+            <enumeration-values>
+              <enumeration-value>yes</enumeration-value>
+              <enumeration-value>no</enumeration-value>
+            </enumeration-values>
+          </data-field>
+        </data-fields>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Fin1">
+        <label>Fin1</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>true</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+    </activities>
+    <transitions>
+      <transition name="Reject__Fin1">
+        <description/>
+        <from>Reject</from>
+        <to>Fin1</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Accept__Fin1">
+        <description/>
+        <from>Accept</from>
+        <to>Fin1</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Manager_s_Approval__Reject">
+        <label>nom</label>
+        <condition>decision=="no"</condition>
+        <description/>
+        <from>Manager_s_Approval</from>
+        <to>Reject</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Administrator_Approval__Reject">
+        <condition>decision=="no"</condition>
+        <description/>
+        <from>Administrator_Approval</from>
+        <to>Reject</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Debut1__Leave_Application_Submission">
+        <description/>
+        <from>Debut1</from>
+        <to>Leave_Application_Submission</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Leave_Application_Submission__Manager_s_Approval">
+        <description/>
+        <from>Leave_Application_Submission</from>
+        <to>Manager_s_Approval</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Administrator_Approval__Accept">
+        <condition>decision=="yes"</condition>
+        <description/>
+        <from>Administrator_Approval</from>
+        <to>Accept</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Manager_s_Approval__Administrator_Approval">
+        <label>oui</label>
+        <condition>decision=="yes"</condition>
+        <description/>
+        <from>Manager_s_Approval</from>
+        <to>Administrator_Approval</to>
+        <is-default>false</is-default>
+      </transition>
+    </transitions>
+    <connectors/>
+    <categories/>
+    <event-sub-processes/>
+  </process>
+</process-definition>

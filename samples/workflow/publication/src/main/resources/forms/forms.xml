@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<forms-definition product-version="5.7">
+  <migration-product-version>5.7</migration-product-version>
+  <application name="PublicationProcess" version="1.0">
+    <permissions>process#PublicationProcess--1.0</permissions>
+    <application-label>PublicationProcess</application-label>
+    <mandatory-symbol>*</mandatory-symbol>
+    <forms>
+      <form first-page="Verification" id="PublicationProcess--1.0--Validation$entry">
+        <form-type>entry</form-type>
+        <permissions>activity#PublicationProcess--1.0--Validation</permissions>
+        <pages>
+          <page id="Verification">
+            <page-label>&amp;nbsp;&amp;nbsp;Publication Process - Verification</page-label>
+            <allow-html-in-label>true</allow-html-in-label>
+            <page-layout>html/Validation_Verification.html</page-layout>
+            <widgets>
+              <widget id="LINK" type="MESSAGE">
+                <initial-value>
+                  <expression>&lt;H4&gt;Your approval is required on this content :&lt;/H4&gt;&#13;
+</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <variable-bound>&lt;H4&gt;Your approval is required on this content :&lt;/H4&gt;&#13;
+</variable-bound>
+              </widget>
+              <widget id="Title" type="TEXT">
+                <initial-value>
+                  <expression>${String path=link.substring (11);&#13;return "&lt;a href ='"+href+path +"'  TARGET = '_blank' title='click to preview the document to validate'&gt;"+(link.split('/'))[(link.split('/')).size()-1]+"&lt;/a&gt;"}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <label>#i18n[Title]</label>
+                <allow-html-in-label>true</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <title/>
+                <variable-bound>${String path=link.substring (11);&#13;return "&lt;a href ='"+href+path +"'  TARGET = '_blank' title='click to preview the document to validate'&gt;"+(link.split('/'))[(link.split('/')).size()-1]+"&lt;/a&gt;"}</variable-bound>
+              </widget>
+              <widget id="Auditor_Comment" type="TEXTBOX">
+                <allow-html-in-field>false</allow-html-in-field>
+                <mandatory>true</mandatory>
+                <readonly>false</readonly>
+                <label>Comment :</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <label-style>label_Validation_Verification_Auditor_Comment</label-style>
+                <style>input_Validation_Verification_Auditor_Comment</style>
+              </widget>
+              <widget id="Champ_texte1" type="TEXT">
+                <initial-value>
+                  <expression>${commentaires}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <title>${commentaires}</title>
+                <variable-bound>${commentaires}</variable-bound>
+              </widget>
+              <widget id="Verified" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Approve</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+              </widget>
+            </widgets>
+            <actions>
+              <action type="SET_VARIABLE">
+                <variable>commentaires</variable>
+                <variable-type>PROCESS_VARIABLE</variable-type>
+                <expression>${Date date=new Date();&#13;
+String date2=date.toLocaleString();&#13;
+&#13;
+if(commentaires.startsWith("No Comments")){&#13;
+	return date2+" ("+loggedUser+") : "+field_Auditor_Comment+"&lt;br/&gt;";&#13;
+} else{&#13;
+	return date2+" ("+loggedUser+") : "+field_Auditor_Comment+"&lt;br/&gt;" + commentaires;&#13;
+}}</expression>
+              </action>
+            </actions>
+          </page>
+        </pages>
+      </form>
+      <form first-page="Validation" id="PublicationProcess--1.0--Publication$entry">
+        <form-type>entry</form-type>
+        <permissions>activity#PublicationProcess--1.0--Publication</permissions>
+        <pages>
+          <page id="Validation">
+            <page-label>&amp;nbsp;&amp;nbsp;Publication Process - Final validation before publication</page-label>
+            <allow-html-in-label>true</allow-html-in-label>
+            <page-layout>html/Publication_Validation.html</page-layout>
+            <widgets>
+              <widget id="LINK" type="MESSAGE">
+                <initial-value>
+                  <expression>&lt;H4&gt;Your Validation is needed before publication&lt;/H4&gt;&#13;
+</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <variable-bound>&lt;H4&gt;Your Validation is needed before publication&lt;/H4&gt;&#13;
+</variable-bound>
+              </widget>
+              <widget id="Title" type="TEXT">
+                <initial-value>
+                  <expression>${String path=link.substring (11);&#13;return "&lt;a href ='"+href+path +"'  TARGET = '_blank' title='click to preview the document to validate'&gt;"+(link.split('/'))[(link.split('/')).size()-1]+"&lt;/a&gt;"}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <label>Title :</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <title/>
+                <variable-bound>${String path=link.substring (11);&#13;return "&lt;a href ='"+href+path +"'  TARGET = '_blank' title='click to preview the document to validate'&gt;"+(link.split('/'))[(link.split('/')).size()-1]+"&lt;/a&gt;"}</variable-bound>
+              </widget>
+              <widget id="Motif" type="TEXTBOX">
+                <allow-html-in-field>false</allow-html-in-field>
+                <mandatory>true</mandatory>
+                <readonly>false</readonly>
+                <label>Comment :</label>
+                <allow-html-in-label>true</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <label-style>label_Publication_Validation_Motif</label-style>
+                <style>input_Publication_Validation_Motif</style>
+              </widget>
+              <widget id="Texte1" type="TEXT">
+                <initial-value>
+                  <expression>${commentaires}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <title>${commentaires}</title>
+                <variable-bound>${commentaires}</variable-bound>
+              </widget>
+              <widget id="Soumettre1" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Publish</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+              </widget>
+              <widget id="Verify" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Refuse</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+              </widget>
+            </widgets>
+            <actions>
+              <action type="SET_VARIABLE">
+                <variable>commentaires</variable>
+                <variable-type>PROCESS_VARIABLE</variable-type>
+                <expression>${Date date=new Date();&#13;
+String date2=date.toLocaleString();&#13;
+return date2+" ("+loggedUser+") : "+field_Motif+"&lt;br/&gt;" + commentaires;}</expression>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>approve</variable>
+                <variable-type>PROCESS_VARIABLE</variable-type>
+                <expression>${import PublicationProcess_1_0.Approval;&#13;
+&#13;
+Approval.YES}</expression>
+                <submit-button>Soumettre1</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>approve</variable>
+                <variable-type>PROCESS_VARIABLE</variable-type>
+                <expression>${import PublicationProcess_1_0.Approval;&#13;
+&#13;
+Approval.NO}</expression>
+                <submit-button>Verify</submit-button>
+              </action>
+            </actions>
+          </page>
+        </pages>
+      </form>
+    </forms>
+  </application>
+</forms-definition>

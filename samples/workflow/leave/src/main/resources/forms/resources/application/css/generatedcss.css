@@ -1,0 +1,23 @@
+
+.Manager_s_Approval_Manager_s_Approval_td_Soumettre1{
+	text-align:center;
+
+}
+
+.Administrator_Approval_Administrator_Approval_td_Soumettre1{
+	text-align:center;
+
+}
+
+.Leave_Application_Submission_Leave_Application_Submission_td_Soumettre1{
+	text-align:center;
+
+}
+
+.bonita_table_container {
+	table-layout: fixed;
+}
+
+.hidden_on_instantiation {
+	display: none;
+}
