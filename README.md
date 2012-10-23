@@ -11,7 +11,7 @@ System requirements
 * Recent Git client
 * Java Development Kit 1.6
 * Recent Maven 3
-* eXo Platform server 3.5.4.  {PLF_HOME}: The location of the unzipped eXo server.
+* eXo Platform server 3.5.5-SNAPSHOT.  {PLF_HOME}: The location of the unzipped eXo server.
 * The eXo server will run on port 8080, make sure this port is not currently in use
 * Bonita Community-5.7.2 : Download "Bonita Open Solution Deployement" and "Tomcat-6.0.33 includes BOS 5.7.2 " from http://www.bonitasoft.com/products/BPM_downloads .
 
@@ -36,8 +36,8 @@ After a build success of the project you will have under the target folder:
 * {PROJECT_HOME}/bonita-extension/config/webapp/target/exo.platform.sample.bonita-website.config-3.5.5-SNAPSHOT.jar  -> it's the activation jar of our extension.
 * {PROJECT_HOME}/bonita-extension/component/filter/target/exo.platform.bonita.component.filter-3.5.5-SNAPSHOT.jar  -> Contains the filter of authentication between plf and bonita.
 * {PROJECT_HOME}/bonita-extension/component/services/target/exo.platform.bonita.component.services-3.5.5-SNAPSHOT.jar  -> Contains Rest services used by the gadget TodoList and Processlist.
-* {PROJECT_HOME}/bonita-extension/component/uiextension/target/exo.platform.bonita.component.uiextension-3.5.5-SNAPSHOT.jar -> Contains teh configuration of the UIExtension added in the GED.
-* {PROJECT_HOME}/bonita-extension/portlet/target/bonita-portlet.war --> Contains teh configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
+* {PROJECT_HOME}/bonita-extension/component/uiextension/target/exo.platform.bonita.component.uiextension-3.5.5-SNAPSHOT.jar -> Contains the configuration of the UIExtension added in the GED.
+* {PROJECT_HOME}/bonita-extension/portlet/target/bonita-portlet.war --> Contains the configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
 * {PROJECT_HOME}/bonita-extension/samples/delivery/target/Workflow-Samples-3.5.5-SNAPSHOT.zip --> Contains some samples of process wich can deployed into  bonita and used through plf.
 
 Bonita integration steps:
@@ -49,7 +49,8 @@ Modification in bonita.war
 
 - Choose from "Bonita Open Solution Deployement" the bonita.war "with_execution_engine_without_client" and modifies it as follows:
 
-     - Add "web authentication filter" in web.xml :                         
+     - Add "web authentication filter" in web.xml :    
+	 
                    <filter>    
                         <filter-name>Web Authentication Filter</filter-name>
                        <filter-class>org.exoplatform.bonitasoft.filter.SetCredentialsInSessionFilter</filter-class>
@@ -58,6 +59,7 @@ Modification in bonita.war
                         <filter-name>Web Authentication Filter</filter-name>
                         <url-pattern>/*</url-pattern>
                   </filter-mapping>
+				  
 				  
 	 - ADD the "exo.platform.bonita.component.filter-3.5.5-SNAPSHOT.jar" in "/WEB-INF/lib" of bonita.war.
 	 
