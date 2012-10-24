@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.exoplatform.bonita</groupId>
-		<artifactId>exo.bonita.doc</artifactId>
+		<groupId>org.exoplatform.platform</groupId>
+		<artifactId>bonita-extension-doc</artifactId>
 		<version>3.5.5-SNAPSHOT</version>
 	</parent>
-	<artifactId>exo.bonita.doc.installguide</artifactId>
+	<artifactId>bonita-extension-doc-install</artifactId>
 	<packaging>pom</packaging>
 	<name>eXo Platform for Bonita - Install Guide</name>
 

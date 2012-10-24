@@ -32,18 +32,19 @@ cd bonita-extension
 
 After a build success of the project you will have under the target folder:
 
-* {PROJECT_HOME}/bonita-extension/webapp/target/bonita-extension.war  ->Contains the configuration files and the specified  gadgets of the integration with eXo platform on tomcat.
-* {PROJECT_HOME}/bonita-extension/config/webapp/target/exo.platform.sample.bonita-website.config-3.5.5-SNAPSHOT.jar  -> it's the activation jar of our extension.
-* {PROJECT_HOME}/bonita-extension/component/filter/target/exo.platform.bonita.component.filter-3.5.5-SNAPSHOT.jar  -> Contains the filter of authentication between plf and bonita.
-* {PROJECT_HOME}/bonita-extension/component/services/target/exo.platform.bonita.component.services-3.5.5-SNAPSHOT.jar  -> Contains Rest services used by the gadget TodoList and Processlist.
-* {PROJECT_HOME}/bonita-extension/component/uiextension/target/exo.platform.bonita.component.uiextension-3.5.5-SNAPSHOT.jar -> Contains the configuration of the UIExtension added in the GED.
-* {PROJECT_HOME}/bonita-extension/portlet/target/bonita-portlet.war --> Contains the configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
-* {PROJECT_HOME}/bonita-extension/samples/delivery/target/Workflow-Samples-3.5.5-SNAPSHOT.zip --> Contains some samples of process wich can deployed into  bonita and used through plf.
+* {PROJECT_HOME}/bonita-extension/webapps/extension/target/bonita-extension.war  ->Contains the configuration files and the specified  gadgets of the integration with eXo platform on tomcat.
+* {PROJECT_HOME}/bonita-extension/component/config/target/bonita-extension-component-config-3.5.5-SNAPSHOT.jar  -> it's the activation jar of our extension.
+* {PROJECT_HOME}/bonita-extension/component/API/filter/target/bonita-extension-component-api-filter-3.5.5-SNAPSHOT.jar  -> Contains the filter of authentication between plf and bonita.
+* {PROJECT_HOME}/bonita-extension/component/API/services/target/bonita-extension-component-api-services-3.5.5-SNAPSHOT.jar  -> Contains Rest services used by the gadget TodoList and Processlist.
+* {PROJECT_HOME}/bonita-extension/component/API/uiextension/target/bonita-extension-component-api-uiextension-3.5.5-SNAPSHOT.jar -> Contains the configuration of the UIExtension added in the GED.
+* {PROJECT_HOME}/bonita-extension/wabapps/portlet/target/bonita-portlet.war --> Contains the configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
+* {PROJECT_HOME}/bonita-extension/component/samples/delivery/target/Workflow-Samples-3.5.5-SNAPSHOT.zip --> Contains some samples of process wich can deployed into  bonita and used through plf.
+* {PROJECT_HOME}/bonita-extension/component/API/authentication/target/bonita-server-auth-5.7.2.jar -> Contains a class for the authentication to bonita.
 
-Bonita integration steps:
+ Manual Packaging Steps
 =======================
 
-Modification in bonita.war
+1)Step 1 : Modification in bonita.war
 -------------
 
 
@@ -66,7 +67,7 @@ Modification in bonita.war
 - After modification, Add bonita.war into  "{PLF_HOME}/webapp"
 	 
 	 
-Modification in bonita-server-rest.war
+2)Step 2 : Modification in bonita-server-rest.war
 ------------- 
 
 - ADD the jar "bonita-server-auth-5.7.2.jar" in "/WEB-INF/lib" of bonita-server-rest.war.
@@ -75,10 +76,10 @@ Modification in bonita-server-rest.war
 
 
 
-Modification of plf configuration files
+3)Step 3 : Modification of plf configuration files
 ------------- 
 
-- {PLF_HOME}/conf/context.xml :
+3.1) {PLF_HOME}/conf/context.xml :
 
 Add the datasource configuration of bonita
    
@@ -136,7 +137,7 @@ Add the datasource configuration of bonita
 
 
 
-- {PLF_HOME}/conf/jaas.xml
+3.2) {PLF_HOME}/conf/jaas.xml
 
 Add the authentication's configuration of bonita  
 
@@ -166,7 +167,7 @@ Add the authentication's configuration of bonita
 				};
 
 
-- {PLF_HOME}/bin/setenv.bat
+3.3) {PLF_HOME}/bin/setenv.bat
 
 Remplace the configuration of the old setenv.bat by
 
@@ -222,12 +223,12 @@ Remplace the configuration of the old setenv.bat by
 				set CATALINA_OPTS=-Xms256m -Xmx1024m -XX:MaxPermSize=256m %CATALINA_OPTS% %LOG_OPTS% %SECURITY_OPTS% %EXO_OPTS% %IDE_OPTS% %EXO_PROFILES% %BONITA_HOME% %REST% %BPM_OPTS%
 
 
-Add Bonita Folder
+4) Step 4 : Add Bonita Folder
 ------------- 
-Move the folder "bonita"wich contains the bonita database configuration under {"PROJECT_HOME}/ressources/" to  "/{PLF_HOME}"
+Move the folder "bonita" wich contains the bonita database configuration under {"PROJECT_HOME}/ressources/" to  "/{PLF_HOME}"
 
 
-Add h2 jar
+5) Step 5 : Add h2 jar
 ------------- 
 Move "h2-1.2.139.jar" i under "/BOS-5.7.2-Tomcat-6.0.33/lib/bonita" to "/{PLF_HOME}/lib"
 

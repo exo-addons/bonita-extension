@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.exoplatform.platform</groupId>
+		<artifactId>bonita-extension-component-api</artifactId>
+		<version>3.5.5-SNAPSHOT</version>
+	</parent>
+	<artifactId>bonita-extension-component-api-authentication</artifactId>
+	<packaging>jar</packaging>
+	<name>Platform for Bonita - authentication</name>
+	
+	<dependencies>
+		<dependency>
+			 <groupId>org.ow2.bonita</groupId>
+			 <artifactId>bonita-server</artifactId>
+			 <version>${bonitasoft.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>bonita-server-auth-${bonitasoft.version}</finalName>
+	</build>
+	
+</project>
+ 

@@ -3,16 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.exoplatform.platform</groupId>
-	<artifactId>bonita-extension</artifactId>
+	    <artifactId>bonita-extension-component</artifactId>
 		<version>3.5.5-SNAPSHOT</version>
 	</parent>
-	<artifactId>bonita-extension-component</artifactId>
-	<packaging>pom</packaging>
-	<name>Platform for Bonita - ComponentsExtension Webapp</name>
-	<description>eXo Platform for Bonita - Components</description>
-	<modules>
-		<module>config</module>
-		<module>samples</module>
-		<module>api</module>
-	</modules>
+	<artifactId>bonita-extension-component-config</artifactId>
+	<packaging>jar</packaging>
+	<name>Platform for Bonita - Extension Configuration</name>
+	<description>Platform for Bonita Extension Configuration</description>
 </project>
