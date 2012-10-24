@@ -47,4 +47,8 @@ After a build success of the project you will have under the target folder:
 * {PROJECT_HOME}/bonita-extension/component/samples/delivery/target/Workflow-Samples-3.5.5-SNAPSHOT.zip --> Contains some samples of process wich can deployed into  bonita and used through plf.
 * {PROJECT_HOME}/bonita-extension/component/API/authentication/target/bonita-server-auth-5.7.2.jar -> Contains a class for the authentication to bonita.
 
+
+Going Further
+=============
+learn more about using the features in the UserGuide ,InstallGuide  and Packaging Guide Manuals.
  
