@@ -27,8 +27,14 @@ cd bonita-extension
 
 2) Build the project
 -----------------------
+Before the project builder you will copy the library "security-server-5.7.2.jar" in the Maven Local rest which is used in the build of the module "component / API / filter".
+So, go to the location of this jar wich "../Tomcat-6.0.33 includes BOS 5.7.2/lib/bonita" and execute this command :
 
->mvn clean install -Dmaven.test.skip -Pexo-private,exo-staging,distrib
+>mvn install:install-file  -Dfile=security-server-5.7.2.jar -DgroupId=org.bonitasoft.console -DartifactId=security-server -Dversion=5.7.2 -Dpackaging=jar -DgeneratePom=true
+
+Return to the {PROJECT_HOME} and execute the build command:
+
+>mvn clean install -Dmaven.test.skip -Pdistrib
 
 After a build success of the project you will have under the target folder:
 
@@ -40,200 +46,10 @@ After a build success of the project you will have under the target folder:
 * {PROJECT_HOME}/bonita-extension/wabapps/portlet/target/bonita-portlet.war --> Contains the configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
 * {PROJECT_HOME}/bonita-extension/component/samples/delivery/target/Workflow-Samples-3.5.5-SNAPSHOT.zip --> Contains some samples of process wich can deployed into  bonita and used through plf.
 * {PROJECT_HOME}/bonita-extension/component/API/authentication/target/bonita-server-auth-5.7.2.jar -> Contains a class for the authentication to bonita.
-
- Manual Packaging Steps
-=======================
-
-1)Step 1 : Modification in bonita.war
--------------
-
-
-- Choose from "Bonita Open Solution Deployement" the bonita.war "with_execution_engine_without_client" and modifies it as follows:
-
-     - Add "web authentication filter" in web.xml :    
-	 
-                   <filter>    
-                        <filter-name>Web Authentication Filter</filter-name>
-                       <filter-class>org.exoplatform.bonitasoft.filter.SetCredentialsInSessionFilter</filter-class>
-                    </filter>
-                  <filter-mapping>
-                        <filter-name>Web Authentication Filter</filter-name>
-                        <url-pattern>/*</url-pattern>
-                  </filter-mapping>
-				  
-				  
-	 - ADD the "exo.platform.bonita.component.filter-3.5.5-SNAPSHOT.jar" in "/WEB-INF/lib" of bonita.war.
-	 
-- After modification, Add bonita.war into  "{PLF_HOME}/webapp"
-	 
-	 
-2)Step 2 : Modification in bonita-server-rest.war
-------------- 
-
-- ADD the jar "bonita-server-auth-5.7.2.jar" in "/WEB-INF/lib" of bonita-server-rest.war.
-
-- After modification, Add bonita-server-rest.war into  "{PLF_HOME}/webapp".
-
-
-
-3)Step 3 : Modification of plf configuration files
-------------- 
-
-3.1) {PLF_HOME}/conf/context.xml :
-
-Add the datasource configuration of bonita
-   
-   
-             <!-- Configure Datasource -->
-    <Resource name="bonita/default/journal"  
-              auth="Container"  
-              type="javax.sql.DataSource" 
-              maxActive="100"  
-              minIdle="10"  
-              maxWait="10000"  
-              initialSize="1" 
-              maxPoolSize="15" 
-              minPoolSize="3"
-              maxConnectionAge="0"
-              maxIdleTime="1800"
-              maxIdleTimeExcessConnections="120"
-              idleConnectionTestPeriod="30"
-              acquireIncrement="3"
-              testConnectionOnCheckout="true"
-              removeAbandoned="true" 
-              logAbandoned="true" 
-              username="bonita" 
-              password="bpm"
-              
-              driverClassName="org.h2.Driver" 
-              url="jdbc:h2:file:${BONITA_HOME}/server/default/work/databases/bonita_journal.db;FILE_LOCK=NO;MVCC=TRUE;DB_CLOSE_ON_EXIT=TRUE"/>
-   
-      
-      <Resource name="bonita/default/history"  
-              auth="Container"  
-              type="javax.sql.DataSource" 
-              maxActive="100"  
-              minIdle="10"  
-              maxWait="10000"  
-              initialSize="1" 
-              maxPoolSize="15" 
-              minPoolSize="3"
-              maxConnectionAge="0"
-              maxIdleTime="1800"
-              maxIdleTimeExcessConnections="120"
-              idleConnectionTestPeriod="30"
-              acquireIncrement="3"
-              testConnectionOnCheckout="true"
-              removeAbandoned="true" 
-              logAbandoned="true" 
-              username="bonita" 
-              password="bpm"
-              driverClassName="org.h2.Driver" 
-              url="jdbc:h2:file:${BONITA_HOME}/server/default/work/databases/bonita_history.db;FILE_LOCK=NO;MVCC=TRUE;DB_CLOSE_ON_EXIT=TRUE"/>
-
-
-
-
-
-
-
-3.2) {PLF_HOME}/conf/jaas.xml
-
-Add the authentication's configuration of bonita  
-
-
-								/**
-				* Performs the authentication of the users using the authentication
-				* service configured in Bonita environment configuration file
-				*/
-				BonitaAuth {
-				  org.ow2.bonita.identity.auth.BonitaIdentityLoginModule required;
-				};
-
-				/**
-				* Used to retrieve the credentials of the user and save them in the 
-				* context shared between the LoginModules stacked in the LoginContext
-				*/
-
-				BonitaStore {
-				  org.ow2.bonita.identity.auth.BonitaRESTLoginModule required restUser="restuser" restPassword="restbpm";
-				};
-
-				/**
-				 * Used by the REST server
-				 */
-				BonitaRESTServer {
-				  org.ow2.bonita.identity.auth.BonitaRESTServerLoginModule required logins="restuser" passwords="restbpm" roles="restuser";
-				};
-
-
-3.3) {PLF_HOME}/bin/setenv.bat
-
-Remplace the configuration of the old setenv.bat by
-
-
-				@REM
-				@REM Copyright (C) 2011 eXo Platform SAS.
-				@REM
-				@REM This is free software; you can redistribute it and/or modify it
-				@REM under the terms of the GNU Lesser General Public License as
-				@REM published by the Free Software Foundation; either version 2.1 of
-				@REM the License, or (at your option) any later version.
-				@REM
-				@REM This software is distributed in the hope that it will be useful,
-				@REM but WITHOUT ANY WARRANTY; without even the implied warranty of
-				@REM MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-				@REM Lesser General Public License for more details.
-				@REM
-				@REM You should have received a copy of the GNU Lesser General Public
-				@REM License along with this software; if not, write to the Free
-				@REM Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-				@REM 02110-1301 USA, or see the FSF site: http://www.fsf.org.
-				@REM
-
-				@REM production script to set environment variables for eXo Platform
-
-				rem Sets some variables
-				set LOG_OPTS=-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog
-				set SECURITY_OPTS=-Djava.security.auth.login.config=..\conf\jaas.conf
-				set EXO_OPTS=-Dexo.product.developing=false -Dexo.conf.dir.name=gatein\conf
-				set IDE_OPTS=-Djavasrc=$JAVA_HOME/src.zip -Djre.lib=$JAVA_HOME/jre/lib
-
-				set res=false
-				if "%EXO_PROFILES%" == "" set res=true
-				if "%EXO_PROFILES%" == "-Dexo.profiles=default" set res=true
-				if "%res%"=="true" (
-					set EXO_PROFILES=-Dexo.profiles=default
-				)
-
-				set BPM_HOSTNAME=localhost
-				set BPM_HTTP_PORT=8080
-				set BPM_URI=http://%BPM_HOSTNAME%:%BPM_HTTP_PORT%
-				rem set BPM_URI=http://%BPM_HOSTNAME%
-
-				set BPM_OPTS=-Dorg.exoplatform.runtime.conf.gatein.host=%BPM_HOSTNAME% %BPM_OPTS%
-				set BPM_OPTS=-Dorg.exoplatform.runtime.conf.gatein.port=%BPM_HTTP_PORT% %BPM_OPTS%
-				set BPM_OPTS=-Dorg.exoplatform.runtime.conf.gatein.portal=portal %BPM_OPTS%
-
-				set BPM_OPTS=-Dorg.exoplatform.runtime.conf.cas.server.name=%BPM_URI% %BPM_OPTS%
-
-				set BONITA_HOME=-DBONITA_HOME=%CATALINA_HOME%\bonita
-				set REST=-Dorg.ow2.bonita.rest-server-address=%BPM_URI%/bonita-server-rest -Dorg.ow2.bonita.api-type=REST
-
-				set CATALINA_OPTS=-Xms256m -Xmx1024m -XX:MaxPermSize=256m %CATALINA_OPTS% %LOG_OPTS% %SECURITY_OPTS% %EXO_OPTS% %IDE_OPTS% %EXO_PROFILES% %BONITA_HOME% %REST% %BPM_OPTS%
-
-
-4) Step 4 : Add Bonita Folder
-------------- 
-Move the folder "bonita" wich contains the bonita database configuration under {"PROJECT_HOME}/ressources/" to  "/{PLF_HOME}"
-
-
-5) Step 5 : Add h2 jar
-------------- 
-Move "h2-1.2.139.jar" i under "/BOS-5.7.2-Tomcat-6.0.33/lib/bonita" to "/{PLF_HOME}/lib"
-
+* {PROJECT_HOME}/bonita-extension/ressources/bonita-extension-resources-3.5.5-SNAPSHOT.jar ->Contains the database Bonita configuration.
 
 
 Going Further
 =============
-learn more about using the features in the UserGuide and InstallGuide Manuals.
+learn more about using the features in the UserGuide ,InstallGuide  and Packaging Guide Manuals.
+ 
