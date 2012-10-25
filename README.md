@@ -33,4 +33,4 @@ The following artefacts are produced :
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
 * ```bonita-extension-resources-3.5.5-SNAPSHOT.jar```: Bonita database configuration.
 
-> Continue with the [Packaging instructions](https://github.com/exo-addons/bonita-extension/wiki/Packaging-Guide-:-Manual-Packaging-Steps)
+> Continue with the [Packaging](https://github.com/exo-addons/bonita-extension/wiki/Packaging) instructions.
