@@ -11,15 +11,16 @@ To build, make sure you have the following properly installed  on your system :
 * Recent Maven 3
 
 1. Download [Bonita Open Solution 5.7.2 - Tomcat bundle](http://www.bonitasoft.com/products/BPM_downloads/all) and unzip it. Then install the security-server lib in your local repository :
-
+```
     cd BOS-5.7.2-Tomcat-6.0.33/lib/bonita
     mvn install:install-file -Dfile=security-server-5.7.2.jar -DgroupId=org.bonitasoft.console -DartifactId=security-server -Dversion=5.7.2 -Dpackaging=jar -DgeneratePom=true
-
+```
 2. Clone this project and build it with maven : 
-
+```
     git clone git@github.com:exo-addons/bonita-extension.git
     cd bonita-extension
     mvn clean install -Dmaven.test.skip -Pdistrib
+```
 
 The following artefacts are produced :
 * ```bonita-extension-component-config-3.5.5-SNAPSHOT.jar```: the activation jar of our extension.
