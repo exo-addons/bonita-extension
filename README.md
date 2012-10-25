@@ -1,16 +1,8 @@
 Bonita Extension for eXo Platform
 ================
 
-This extension for eXo Platform integrates Bonita BPM engine and features :
-* A Process List gadget that lists available business processes
-* A Workflow Tasks gadget that lists tasks to take in the current process instances
-* A Publication Process integrated with eXo Publication and the Activity Stream
-* A UI extension for the eXo Content Explorer to display the publication status and comments
-* A sample Leave Application process
-* Access to workflow forms
-* Access to the Bonita Administration console
 
-
+Learn about this addon and get started on [wiki](https://github.com/exo-addons/bonita-extension/wiki).
 
 
 Build Instructions
