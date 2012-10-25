@@ -1,22 +1,11 @@
-Bonita Extension for eXo Platform
+How to Build the Bonita Extension for eXo Platform
 ================
 
-This extension for eXo Platform integrates Bonita BPM engine and features :
-* A Process List gadget that lists available business processes
-* A Workflow Tasks gadget that lists tasks to take in the current process instances
-* A Publication Process integrated with eXo Publication and the Activity Stream
-* A UI extension for the eXo Content Explorer to display the publication status and comments
-* A sample Leave Application process
-* Access to workflow forms
-* Access to the Bonita Administration console
+
+Before you start to build, visit our intro on [wiki](https://github.com/exo-addons/bonita-extension/wiki).
 
 
-
-
-Build Instructions
-==================
-
-First, make sure this is installed on your system :   
+To build, make sure you have the following properly installed  on your system :   
 * Recent Git client
 * Java Development Kit 1.6
 * Recent Maven 3
@@ -32,7 +21,8 @@ Clone this project and build it with maven :
     cd bonita-extension
     mvn clean install -Dmaven.test.skip -Pdistrib
 
-the following artefacts are produced :
+
+The following artefacts are produced :
 * ```bonita-extension-component-config-3.5.5-SNAPSHOT.jar```: the activation jar of our extension.
 * ```bonita-extension-component-api-filter-3.5.5-SNAPSHOT.jar```: the filter for authentication between plf and bonita.
 * ```bonita-extension-component-api-services-3.5.5-SNAPSHOT.jar```: REST services used by the gadgets.
@@ -43,13 +33,4 @@ the following artefacts are produced :
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
 * ```bonita-extension-resources-3.5.5-SNAPSHOT.jar```: Bonita database configuration.
 
-
-Getting Started
-=============
-
-1. Get [eXo Platform 3.5.5](http://www.exoplatform.com/exo-platform-3.5-trial/eXo-Platform-3.5.zip) and unzip it.
-2. Download [Bonita Open Solution Deployement (BOS-5.7.2-deploy.zip)](http://www.bonitasoft.com/products/BPM_downloads/all) and unzip it.
-2. Follow the [Packaging Instructions](https://github.com/exo-addons/bonita-extension/wiki/Packaging-Guide-:-Manual-Packaging-Steps) to learn how to package bonita and the extension within the eXo Platform bundle.
-3. Follow the [Install Guide](https://github.com/exo-addons/bonita-extension/wiki/InstallGuide) to Learn how to install the package and the sample processes 
-4. Finally, read the [User Guide](https://github.com/exo-addons/bonita-extension/wiki/User-Guide) to learn how to use the features of the extension.
- 
+> Continue with the [Packaging](https://github.com/exo-addons/bonita-extension/wiki/Packaging) instructions.
