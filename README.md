@@ -6,7 +6,7 @@ Learn about this addon and get started on [wiki](https://github.com/exo-addons/b
 
 
 Build Instructions
-==================
+------
 
 First, make sure this is installed on your system :   
 * Recent Git client
@@ -34,14 +34,3 @@ the following artefacts are produced :
 * ```Workflow-Samples-3.5.5-SNAPSHOT.zip```: sample processes which can be deployed into  bonita and used through plf.
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
 * ```bonita-extension-resources-3.5.5-SNAPSHOT.jar```: Bonita database configuration.
-
-
-Getting Started
-=============
-
-1. Get [eXo Platform 3.5.5](http://www.exoplatform.com/exo-platform-3.5-trial/eXo-Platform-3.5.zip) and unzip it.
-2. Download [Bonita Open Solution Deployement (BOS-5.7.2-deploy.zip)](http://www.bonitasoft.com/products/BPM_downloads/all) and unzip it.
-2. Follow the [Packaging Instructions](https://github.com/exo-addons/bonita-extension/wiki/Packaging-Guide-:-Manual-Packaging-Steps) to learn how to package bonita and the extension within the eXo Platform bundle.
-3. Follow the [Install Guide](https://github.com/exo-addons/bonita-extension/wiki/InstallGuide) to Learn how to install the package and the sample processes 
-4. Finally, read the [User Guide](https://github.com/exo-addons/bonita-extension/wiki/User-Guide) to learn how to use the features of the extension.
- 
