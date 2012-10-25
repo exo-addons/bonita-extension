@@ -1,0 +1,111 @@
+
+/* default page template style */
+.bonita-priority {
+	color:#de1c18;
+	font-weight:bold;
+}
+
+.bonita_form_confirm_message {
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	font-size: 14px;
+}
+
+.bonita_form_error_message {
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	font-size: 14px;
+}
+
+.bonita_form_cause_message {
+	color: black;
+	font-weight: normal;
+	text-align: left;
+	padding: 30px;
+	font-size: 12px;
+}
+
+div#bonita-object-area-top {
+	width:500px;
+	height:6px;
+	background-image:url(../images/object-area-top.png);
+	margin-top:5px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div#bonita-object-area-middle {
+	position:relative;
+	width:500px;
+	min-height:40px;
+	background-image:url(../images/object-area-middle.png);
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div#bonita-object-area-bottom {
+	width:500px;
+	height:6px;
+	margin-bottom:5px;
+	background-image:url(../images/object-area-bottom.png);
+	margin-left:auto;
+	margin-right:auto;
+}
+	
+div#bonita-object-area-from {
+	margin-left:4px;
+	height:auto;
+	width:192px;
+	float:left;
+}
+
+div#bonita-object-area-to {
+	height:auto;
+	width:192px;
+	float:left;
+	margin-left:4px;
+}
+
+div#bonita-object-area-description {
+	clear:both;
+	text-align:left;
+	padding-top:4px;
+	margin-left:4px;
+	margin-right:4px;
+}
+
+div#bonita-object-area-priority {
+    height:auto;
+    margin-right:4px;
+    text-align:right;
+}
+
+.bonita_form_page_label {
+	width:100%;
+	height:auto;
+	text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#333333;
+}
+
+.bonita_form_container {
+	margin-left: auto;
+	margin-right: auto;
+	clear: both;
+	width: 690px;
+	font-family: "Nimbus Sans L", Arial, "Liberation Sans", FreeSans, sans-serif;
+	table-layout: fixed;
+}
+
+	
