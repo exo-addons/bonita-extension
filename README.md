@@ -27,7 +27,7 @@ The following artefacts are produced :
 * ```bonita-extension-component-api-filter-3.5.5-SNAPSHOT.jar```: the filter for authentication between plf and bonita.
 * ```bonita-extension-component-api-services-3.5.5-SNAPSHOT.jar```: REST services used by the gadgets.
 * ```bonita-extension-component-api-uiextension-3.5.5-SNAPSHOT.jar```: configuration of the UIExtension added in the Content Explorer.
-* ```bonita-extension.war```: the configuration files and the specified  gadgets of the integration with eXo Platfor.
+* ```bonita-extension.war```: the configuration files and the specified  gadgets of the integration with eXo Platform.
 * ```bonita-portlet.war```: configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
 * ```Workflow-Samples-3.5.5-SNAPSHOT.zip```: sample processes which can be deployed into  bonita and used through plf.
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
