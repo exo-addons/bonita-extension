@@ -33,4 +33,59 @@ The following artefacts are produced :
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
 * ```bonita-extension-resources-3.5.5-SNAPSHOT.jar```: Bonita database configuration.
 
+Troubleshooting
+----
+
+If the build complains about missing artifacts, please let us know [via our forums](http://forum.exoplatform.org).
+
+As a quick workaround, you may try setting up eXo maven repositories as follows.
+
+Edit your```$HOME/.m2/settings.xml```  (```%HOMEPATH%\.m2\settings.xml``` on Windows) as follows :
+
+ ```xml
+                             <settings>
+                               <profiles>
+                                 <profile>
+                                   <id>exo-public-repository</id>
+                                   <repositories>
+                                     <repository>
+                                       <id>exo-public-repository-group</id>
+                                       <name>eXo Public Maven Repository Group</name>
+                                       <url>http://repository.exoplatform.org/content/groups/public</url>
+                                       <layout>default</layout>
+                                       <releases>
+                                         <enabled>true</enabled>
+                                         <updatePolicy>never</updatePolicy>
+                                       </releases>
+                                       <snapshots>
+                                         <enabled>true</enabled>
+                                         <updatePolicy>never</updatePolicy>
+                                       </snapshots>
+                                     </repository>
+                                   </repositories>
+                                   <pluginRepositories>
+                                     <pluginRepository>
+                                       <id>exo-public-repository-group</id>
+                                       <name>eXo Public Maven Repository Group</name>
+                                       <url>http://repository.exoplatform.org/content/groups/public</url>
+                                       <layout>default</layout>
+                                       <releases>
+                                         <enabled>true</enabled>
+                                         <updatePolicy>never</updatePolicy>
+                                       </releases>
+                                       <snapshots>
+                                         <enabled>true</enabled>
+                                         <updatePolicy>never</updatePolicy>
+                                       </snapshots>
+                                     </pluginRepository>
+                                   </pluginRepositories>
+                                 </profile>
+                               </profiles>
+                               <activeProfiles>
+                                 <activeProfile>exo-public-repository</activeProfile>
+                               </activeProfiles>
+                             </settings>
+```
+
+
 > Continue with the [Packaging](https://github.com/exo-addons/bonita-extension/wiki/Packaging) instructions.
