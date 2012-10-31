@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.exoplatform.platform</groupId>
 		<artifactId>bonita-extension-migration</artifactId>
-		<version>3.5.5-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>bonita-extension-migration-doc</artifactId>
 	<packaging>pom</packaging>
