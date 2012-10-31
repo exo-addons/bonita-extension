@@ -8,7 +8,7 @@ Before you start to build, visit our intro on [wiki](https://github.com/exo-addo
 To build, make sure you have the following properly installed  on your system :   
 * Recent Git client
 * Java Development Kit 1.6
-* Recent Maven 3
+* Recent Maven 3.0.3
 
 Download [Bonita Open Solution 5.7.2 - Tomcat bundle](http://www.bonitasoft.com/products/BPM_downloads/all) and unzip it. Then install the security-server lib in your local repository :
 
