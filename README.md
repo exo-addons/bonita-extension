@@ -17,7 +17,7 @@ Download [Bonita Open Solution 5.7.2 - Tomcat bundle](http://www.bonitasoft.com/
 
 Clone this project and build it with maven : 
 
-    git clone git@github.com:exo-addons/bonita-extension.git
+    git clone https://github.com/exo-addons/bonita-extension.git
     cd bonita-extension
     mvn clean install -Dmaven.test.skip -Pdistrib
 
