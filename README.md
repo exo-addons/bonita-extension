@@ -21,6 +21,7 @@ Clone this project :
     cd bonita-extension
 
 Before build it, change exo depencies in root pom.xml to match your target eXoPlatform version. Then build it with maven :
+
     mvn clean install -Dmaven.test.skip -Pdistrib
 
 
