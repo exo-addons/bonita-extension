@@ -13,6 +13,6 @@
 	<modules>
 		<module>config</module>
 		<module>samples</module>
-		<module>api</module>
+		<module>API</module>
 	</modules>
 </project>

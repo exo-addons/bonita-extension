@@ -15,10 +15,13 @@ Download [Bonita Open Solution 5.7.2 - Tomcat bundle](http://www.bonitasoft.com/
     cd BOS-5.7.2-Tomcat-6.0.33/lib/bonita
     mvn install:install-file -Dfile=security-server-5.7.2.jar -DgroupId=org.bonitasoft.console -DartifactId=security-server -Dversion=5.7.2 -Dpackaging=jar -DgeneratePom=true
 
-Clone this project and build it with maven : 
+Clone this project : 
 
-    git clone git@github.com:exo-addons/bonita-extension.git
+    git clone https://github.com/exo-addons/bonita-extension.git
     cd bonita-extension
+
+Before build it, change exo depencies in root pom.xml to match your target eXoPlatform version. Then build it with maven :
+
     mvn clean install -Dmaven.test.skip -Pdistrib
 
 
