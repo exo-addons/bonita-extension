@@ -23,15 +23,15 @@ Clone this project and build it with maven :
 
 
 The following artefacts are produced :
-* ```bonita-extension-component-config-3.5.5-SNAPSHOT.jar```: the activation jar of our extension.
-* ```bonita-extension-component-api-filter-3.5.5-SNAPSHOT.jar```: the filter for authentication between plf and bonita.
-* ```bonita-extension-component-api-services-3.5.5-SNAPSHOT.jar```: REST services used by the gadgets.
-* ```bonita-extension-component-api-uiextension-3.5.5-SNAPSHOT.jar```: configuration of the UIExtension added in the Content Explorer.
+* ```bonita-extension-component-config-1.0.0-SNAPSHOT.jar```: the activation jar of our extension.
+* ```bonita-extension-component-api-filter-1.0.0-SNAPSHOT.jar```: the filter for authentication between plf and bonita.
+* ```bonita-extension-component-api-services-1.0.0-SNAPSHOT.jar```: REST services used by the gadgets.
+* ```bonita-extension-component-api-uiextension-1.0.0-SNAPSHOT.jar```: configuration of the UIExtension added in the Content Explorer.
 * ```bonita-extension.war```: the configuration files and the specified  gadgets of the integration with eXo Platform.
 * ```bonita-portlet.war```: configuration and modification of UIIFramePortlet and UIParametrizedIFramePortlet.
-* ```Workflow-Samples-3.5.5-SNAPSHOT.zip```: sample processes which can be deployed into  bonita and used through plf.
+* ```Workflow-Samples-1.0.0-SNAPSHOT.zip```: sample processes which can be deployed into  bonita and used through plf.
 * ```bonita-server-auth-5.7.2.jar```: a class for the authentication to bonita.
-* ```bonita-extension-resources-3.5.5-SNAPSHOT.jar```: Bonita database configuration.
+* ```bonita-extension-resources-1.0.0-SNAPSHOT.jar```: Bonita database configuration.
 
 Troubleshooting
 ----
