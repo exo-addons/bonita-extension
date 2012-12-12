@@ -18,12 +18,12 @@
 		<url>https://github.com/exo-addons/bonita-extension</url>
     </scm>
 	<properties>
-		<org.exoplatform.jcr.version>1.14.9-GA-SNAPSHOT</org.exoplatform.jcr.version>
-		<org.exoplatform.portal.version>3.2.6-PLF-SNAPSHOT</org.exoplatform.portal.version>
-		<org.exoplatform.ecms.version>2.3.9-SNAPSHOT</org.exoplatform.ecms.version>
-		<org.exoplatform.social.version>1.2.11-SNAPSHOT</org.exoplatform.social.version>
-		<org.exoplatform.commons.version>1.1.10-SNAPSHOT</org.exoplatform.commons.version>
-		<org.exoplatform.kernel.version>2.3.9-GA-SNAPSHOT</org.exoplatform.kernel.version>
+		<org.exoplatform.jcr.version>1.14.9-GA</org.exoplatform.jcr.version>
+		<org.exoplatform.portal.version>3.2.6-PLF</org.exoplatform.portal.version>
+		<org.exoplatform.ecms.version>2.3.9</org.exoplatform.ecms.version>
+		<org.exoplatform.social.version>1.2.11</org.exoplatform.social.version>
+		<org.exoplatform.commons.version>1.1.10</org.exoplatform.commons.version>
+		<org.exoplatform.kernel.version>2.3.9-GA</org.exoplatform.kernel.version>
 		<bonitasoft.version>5.7.2</bonitasoft.version>
 		<h2.version>1.2.139</h2.version>
 		<tagsoup.version>1.2</tagsoup.version>
@@ -34,6 +34,7 @@
 		<module>component</module>
 		<module>webapps</module>
 		<module>migration</module>
+		<module>ressources</module>
 	</modules>
 
 </project>
