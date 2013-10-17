@@ -1,40 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-	 <groupId>org.exoplatform</groupId>
-	 <artifactId>exo.parent</artifactId>
-	 <version>7.1</version>
-	 <relativePath/>
-	</parent>
-	<groupId>org.exoplatform.platform</groupId>
+	<groupId>org.exoplatform.bonita-extension</groupId>
 	<artifactId>bonita-extension</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>eXo BonitaSoft Integration</name>
-	<scm>
-		<connection>scm:git:git://github.com/exo-addons/bonita-extension.git</connection>
-		<developerConnection>scm:git:git@github.com:exo-addons/bonita-extension.git</developerConnection>
-		<url>https://github.com/exo-addons/bonita-extension</url>
-    </scm>
+	<parent>
+		<artifactId>platform</artifactId>
+		<groupId>org.exoplatform.platform</groupId>
+		<version>4.0.1</version>
+	</parent>
 	<properties>
-		<org.exoplatform.jcr.version>1.14.10-GA</org.exoplatform.jcr.version>
-		<org.exoplatform.portal.version>3.2.7-PLF</org.exoplatform.portal.version>
-		<org.exoplatform.ecms.version>2.3.10</org.exoplatform.ecms.version>
-		<org.exoplatform.social.version>1.2.12</org.exoplatform.social.version>
-		<org.exoplatform.commons.version>1.1.11</org.exoplatform.commons.version>
-		<org.exoplatform.kernel.version>2.3.10-GA</org.exoplatform.kernel.version>
-		<bonitasoft.version>5.7.2</bonitasoft.version>
-		<h2.version>1.2.139</h2.version>
-		<tagsoup.version>1.2</tagsoup.version>
-		<metadata.version>2.4.0-beta-1</metadata.version>
-		<version.wikbook.plugin>0.9.37</version.wikbook.plugin>
+		<bonita.version>6.0.3</bonita.version>
+		<org.exoplatform.portal.version>3.5.6-PLF</org.exoplatform.portal.version>
 	</properties>
 	<modules>
-		<module>component</module>
+		<module>bonita-connector-webdav</module>
+		<module>bonita-connector-consulting-compute</module>
+		<module>bonita-filter</module>
+		<module>config</module>
 		<module>webapps</module>
-		<module>migration</module>
-		<module>ressources</module>
+		<module>bonita-services</module>
 	</modules>
 
 </project>

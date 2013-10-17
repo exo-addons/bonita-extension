@@ -2,16 +2,70 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.exoplatform.platform</groupId>
-	    <artifactId>bonita-extension</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>org.exoplatform.bonita-extension</groupId>
+		<artifactId>bonita-extension</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>bonita-extension-webapps</artifactId>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 	<name>Platform for Bonita - ComponentsExtension Webapp</name>
 	<description>eXo Platform for Bonita - WebApps</description>
-	<modules>
-		<module>extension</module>
-		<module>portlet</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.gatein.portal</groupId>
+			<artifactId>exo.portal.webui.portal</artifactId>
+			<version>${org.gatein.portal.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<finalName>bonita-extension</finalName>
+
+		<plugins>
+		<plugin>
+			<artifactId>maven-resources-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>copy-resources</id>
+					<phase>generate-resources</phase>
+					<goals>
+						<goal>copy-resources</goal>
+					</goals>
+					<configuration>
+						<outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+						<resources>
+							<resource>
+								<directory>${basedir}/src/main/webapp</directory>
+							</resource>
+						</resources>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+
+			<plugin>
+				<groupId>org.lesscss</groupId>
+				<artifactId>lesscss-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>administration</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.build.directory}/${project.build.finalName}/skin/less</sourceDirectory>
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/skin/css</outputDirectory>
+							<excludes>
+								<exclude>mixins.less</exclude>
+								<exclude>variables.less</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
