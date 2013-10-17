@@ -1,11 +1,14 @@
 1) Get Bonita Community : http://www.bonitasoft.com/products/download-bpm-software-and-documentation
 J'ai utilisé la 6.0.3, mais ca devrait fonctionner avec la 6.0.4 => le placer dans $BONITA_HOME
-2) Get eXoPlatform : jai utilisé la 4.0.2-CP01 => le placer dans $EXO_HOME
+
+2) Get eXoPlatform : jai utilisé la 4.0.2-CP01 => le placer dans $EXO_HOMEa
+
 3) copy :
 	$BONITA_HOME/bonita/client dans $EXO_HOME/bonita
 	$BONITA_HOME/webapps/bonita/WEB-INF/lib/bonita-client-6.0.x.jar to $EXO_HOME/lib/
 	$BONITA_HOME/webapps/bonita/WEB-INF/lib/bonita-common-6.0.x.jar to $EXO_HOME/lib/
 	$BONITA_HOME/webapps/bonita/WEB-INF/lib/httpmime-4.2.5.jar to $EXO_HOME/lib/
+
 4) Replace :
 	$EXO_HOME/lib/httpcore-4.1.2.jar by $BONITA_HOME/webapps/bonita/WEB-INF/lib/httpcore-4.2.4.jar
 	$EXO_HOME/lib/httpclient-4.1.2.jar by $BONITA_HOME/webapps/bonita/WEB-INF/lib/httpclient-4.2.5.jar
