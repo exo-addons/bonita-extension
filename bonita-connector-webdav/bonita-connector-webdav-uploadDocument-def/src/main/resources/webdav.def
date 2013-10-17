@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition:ConnectorDefinition xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.0">
+  <id>webdav</id>
+  <version>1.0.0</version>
+  <icon>webdav.png</icon>
+  <category icon="webdav.png" id="1"/>
+
+  	<input name="host" type="java.lang.String" mandatory="true" defaultValue="localhost" />
+  	<input name="port" type="java.lang.Long" mandatory="true" defaultValue="8080" />
+  	<input name="username" type="java.lang.String" mandatory="true" />
+  	<input name="password" type="java.lang.String" mandatory="true" />
+
+  	<input name="fileStream" type="java.io.InputStream" mandatory="true" />
+  	<input name="destinationURI" type="java.lang.String" mandatory="true"/>
+  	<input name="contentType" type="java.lang.String" mandatory="true" defaultValue="text/plain" />
+
+  	<output name="responseDocument" type="java.lang.String" />
+  	<output name="statusCode" type="java.lang.String" />
+  	<output name="statusText" type="java.lang.String" />
+
+  	<page id="eXoWebDavConfiguration">
+  		<widget id="host" inputName="host" xsi:type="definition:Text" />
+  		<widget id="port" inputName="port" xsi:type="definition:Text" />
+  		<widget id="username" inputName="username" xsi:type="definition:Text" />
+  		<widget id="password" inputName="password" xsi:type="definition:Password" />
+  	</page>
+
+  	<page id="FunctionParameters">
+  		<widget id="fileStream" inputName="fileStream" xsi:type="definition:Text" />
+  		<widget id="destinationURI" inputName="destinationURI" xsi:type="definition:Text" />
+  		<widget id="contentType" inputName="contentType" xsi:type="definition:Text" />
+  	</page>
+
+  	<jarDependency>bonita-connector-webdav-common-1.0.0-SNAPSHOT.jar</jarDependency>
+
+</definition:ConnectorDefinition>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="TasksList"
+				 author="Romain Dénarié"
+				 author_email="rdenarie@exoplatform.com"
+				 thumbnail="/bonita-extension/skin/images/TasksList/tasksList-icon.png">
+		<Require feature="settitle" />
+		<Require feature="dynamic-height" />
+		<Locale messages="locale/default.xml" />
+	</ModulePrefs>
+	<Content type="html">
+		<![CDATA[
+    <head>
+      <title>TasksList</title>
+      <link rel="stylesheet" type="text/css" href="/exo-gadget-resources/skin/exo-gadget/gadget-common.css" />
+      <link type="text/css" rel="stylesheet" href="/bonita-extension/skin/css/tasksList.css" />
+      <link rel="stylesheet" type="text/css" href="/eXoResources/skin/bootstrap/css/bootstrap.css" />
+
+      <script language="javascript" type="text/javascript" src="/exo-gadget-resources/script/jquery/1.6.2/jquery.min.js"></script>
+
+
+      <script type="text/javascript">
+        function loadInfos() {
+          var items = [];
+          $.getJSON('/rest/bonitaService/getTaskList', function(data) {
+                 $.each(data, function(i, task) {
+                   var host = task.host;
+                   var port = task.port;
+                   var username=task.username;
+                   var name = task.humanTaskInstance.name;
+                   var id = task.taskId;
+
+                   /*
+                     Here we use simple solution to transfer  user id.
+                   */
+                   var redirect = "/bonita/console/homepage?ui=form#form="+name+"$entry&username="+username+"&task="+id+"&mode=form";
+                   var content = "Task "+name;
+                   var bonitaLink= "/bonita/getForm?username="+username+"&redirect="+redirect;
+                   var link="/portal/intranet/workflow?url=http://"+host+":"+port+encodeURIComponent(bonitaLink);
+
+                   /*
+                     For use a real SSO (like CAS for example), use this part instead of previous one :
+                      var link="http://"+host+":"+port+"/bonita/console/homepage?ui=form#form="+name+"$entry&username="+username+"&task="+id+"&mode=form";
+            desactivate filter GenerateSessionFilter in BonitaServer
+                   */
+
+                   items.push('<li><a class="taskLink" href="'+link+'">'+content+'</a></li>');
+                 });
+                 $('#taskListInfos').empty();
+                 if (items.length==0) {
+          $('#taskListInfos').append("No task available.");
+                 } else {
+                   $('#taskListInfos').append("<ul>"+items.join("")+"</ul>");
+                 }
+                 gadgets.window.adjustHeight($("#taskListGadget").get(0).offsetHeight);
+
+          });
+        }
+
+        function init() {
+          loadInfos();
+        }
+        gadgets.util.registerOnLoadHandler(init);
+
+      </script>
+    </head>
+    <body>
+      <div class="uiGadgetThemes uiBox" id="taskListGadget">
+        <h6 class="gadgetTitle title center">
+          Task List
+          <a class="uiIconClose pull-right" title="Close Window" rel="tooltip" data-placement="bottom" onclick=""></a>
+        </h6>
+        <div id="taskListInfos" class="gadContent templates">
+          Loading data ...
+        </div>
+      </div>
+    </body>
+    ]]>
+	</Content>
+</Module>
