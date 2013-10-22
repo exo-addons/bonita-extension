@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-		<groupId>org.bonitasoft.connectors</groupId>
+		<groupId>org.exoplatform.bonita-extension</groupId>
 		<artifactId>bonita-connector-webdav</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
     </parent>
@@ -23,9 +23,9 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.bonitasoft.engine.api</groupId>
-			<artifactId>bonita-common-api</artifactId>
-			<version>6.1.0-rc-02</version>
+			<groupId>org.ow2.bonita.engine</groupId>
+			<artifactId>bonita-common</artifactId>
+			<version>${bonita.version}</version>
 		</dependency>
     </dependencies>
 
@@ -35,9 +35,9 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <dependencies>
                     <dependency>
-                        <groupId>org.bonitasoft.connectors</groupId>
+                        <groupId>org.ow2.bonita.connectors</groupId>
                         <artifactId>bonita-connectors-assembly</artifactId>
-                        <version>6.1.0-rc-01</version>
+                        <version>${bonita.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>
