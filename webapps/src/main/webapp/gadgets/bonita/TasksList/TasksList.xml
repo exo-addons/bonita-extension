@@ -38,6 +38,9 @@
                    var bonitaLink= "http://"+host+":"+port+"/bonita/getForm?username="+username+"&redirect="+redirect;
                    var link="/portal/intranet/workflow?url=http://"+host+":"+port+encodeURIComponent(bonitaLink);
 
+			//use bonitaLink to open the form in a new tab, with a target=_blank in a tag
+			//use link to have to form in an iframe in the portal
+
                    /*
                      For use a real SSO (like CAS for example), use this part instead of previous one :
                       var link="http://"+host+":"+port+"/bonita/console/homepage?ui=form#form="+name+"$entry&username="+username+"&task="+id+"&mode=form";
