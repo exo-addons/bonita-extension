@@ -39,8 +39,8 @@
                    var bonitaLink = "http://"+host+":"+port+"/bonita/getForm?username="+username+"&redirect="+redirect; 
                    var link="/portal/intranet/workflow?url="+encodeURIComponent(bonitaLink);
                    
-                   //use bonitaLink to open the form in a new tab, with a target=_blank in a tag
-                   //use link to have to form in an iframe in the portal
+                   //use bonitaLink to open the form in a new tab, with a target=_blank in tag a
+                   //use link to have to form in an iframe in the portal with a target=_parent in tag a
 
                    /*
                      For use a real SSO (like CAS for example), use this part instead of previous one :
@@ -48,7 +48,7 @@
             desactivate filter GenerateSessionFilter in BonitaServer
                    */
 
-                   items.push('<li><a class="processLink" href="'+link+'">'+content+'</a></li>');
+                   items.push('<li><a class="processLink" href="'+link+'" target="_parent">'+content+'</a></li>');
 
 
                  });
