@@ -150,3 +150,18 @@ TODO :
 - add a trim on properties
 - add title on gadgets
 	
+
+
+Note about build 
+-----------------
+Actually, connectors building are deactivated from global mvn clean install. The reason is because there is a dependencies on 
+	
+	<groupId>org.ow2.bonita.connectors</groupId>
+        <artifactId>bonita-connectors-assembly</artifactId>
+        <version>${bonita.version}</version>
+        
+which is not on maven. To have this, you have to build this bonita project :
+https://github.com/bonitasoft/bonita-connectors-assembly/tree/bonita-connectors-assembly-6.0.x
+in the version corresponding to your.
+
+You have not to build connectors to tests this extension, they are integrated in workflow example.
