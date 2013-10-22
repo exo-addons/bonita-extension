@@ -13,11 +13,10 @@
 	</parent>
 	<properties>
 		<bonita.version>6.0.3</bonita.version>
-		<org.exoplatform.portal.version>3.5.6-PLF</org.exoplatform.portal.version>
 	</properties>
 	<modules>
-		<module>bonita-connector-webdav</module>
-		<module>bonita-connector-consulting-compute</module>
+		<!--module>bonita-connector-webdav</module>
+		<module>bonita-connector-consulting-compute</module-->
 		<module>bonita-filter</module>
 		<module>config</module>
 		<module>webapps</module>

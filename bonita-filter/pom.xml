@@ -20,8 +20,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.bonitasoft.console</groupId>
-			<artifactId>common-server</artifactId>
+			<groupId>org.ow2.bonita.engine</groupId>
+			<artifactId>bonita-client</artifactId>
 			<version>${bonita.version}</version>
 		</dependency>
 	</dependencies>

@@ -11,42 +11,6 @@
 	<name>Platform for Bonita - Core Services</name>
 
 	<dependencies>
-		<!--<dependency>
-			<groupId>org.exoplatform.portal</groupId>
-			<artifactId>exo.portal.component.web.api</artifactId>
-			<version>${org.exoplatform.portal.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.exoplatform.portal</groupId>
-			<artifactId>exo.portal.webui.portal</artifactId>
-			<version>${org.exoplatform.portal.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.exoplatform.jcr</groupId>
-			<artifactId>exo.jcr.component.core</artifactId>
-			<version>${org.exoplatform.jcr.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.exoplatform.ecms</groupId>
-			<artifactId>exo-ecms-core-publication</artifactId>
-			<version>${org.exoplatform.ecms.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.exoplatform.ecms</groupId>
-			<artifactId>exo-ecms-core-publication-plugins</artifactId>
-			<version>${org.exoplatform.ecms.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.exoplatform.social</groupId>
-			<artifactId>exo.social.component.core</artifactId>
-			<version>${org.exoplatform.social.version}</version>
-			<scope>provided</scope>
-		</dependency>-->
 		<dependency>
 			<groupId>org.exoplatform.kernel</groupId>
 			<artifactId>exo.kernel.commons</artifactId>
@@ -75,18 +39,13 @@
 			<version>3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.bonitasoft.engine</groupId>
+			<groupId>org.ow2.bonita.engine</groupId>
 			<artifactId>bonita-client</artifactId>
 			<version>${bonita.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.bonitasoft.engine</groupId>
+			<groupId>org.ow2.bonita.engine</groupId>
 			<artifactId>bonita-common</artifactId>
-			<version>${bonita.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bonitasoft.engine.util</groupId>
-			<artifactId>bonita-common-util</artifactId>
 			<version>${bonita.version}</version>
 		</dependency>
 		<dependency>
@@ -95,9 +54,9 @@
 			<version>${org.exoplatform.core.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.exoplatform.portal</groupId>
+			<groupId>org.gatein.portal</groupId>
 			<artifactId>exo.portal.component.web.api</artifactId>
-			<version>3.2.7-PLF</version>
+			<version>${org.gatein.portal.version}</version>
 		</dependency>
 	</dependencies>
 
