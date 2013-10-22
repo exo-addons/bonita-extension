@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-	<ModulePrefs title="ProcessList"
+	<ModulePrefs title="Process List"
 				 author="Romain Dénarié"
 				 author_email="rdenarie@exoplatform.com"
 				 thumbnail="/bonita-extension/skin/images/ProcessList/processList-icon.png">
