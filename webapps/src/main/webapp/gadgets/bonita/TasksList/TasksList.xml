@@ -35,7 +35,7 @@
                    */
                    var redirect = "/bonita/console/homepage?ui=form#form="+name+"$entry&username="+username+"&task="+id+"&mode=form";
                    var content = "Task "+name;
-                   var bonitaLink= "/bonita/getForm?username="+username+"&redirect="+redirect;
+                   var bonitaLink= "http://"+host+":"+port+"/bonita/getForm?username="+username+"&redirect="+redirect;
                    var link="/portal/intranet/workflow?url=http://"+host+":"+port+encodeURIComponent(bonitaLink);
 
                    /*
