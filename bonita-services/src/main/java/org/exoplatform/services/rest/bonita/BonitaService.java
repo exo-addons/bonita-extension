@@ -14,6 +14,7 @@ import org.bonitasoft.engine.platform.LoginException;
 import org.bonitasoft.engine.search.SearchResult;
 import org.bonitasoft.engine.search.impl.SearchOptionsImpl;
 import org.bonitasoft.engine.session.APISession;
+import org.bonitasoft.engine.session.InvalidSessionException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
@@ -56,13 +57,13 @@ public class BonitaService implements ResourceContainer {
 
 
 	public static final int MAX_HOST_CONNECTIONS = 20;
-	public static final String REST_USER = System.getProperty("org.exoplatform.bonita.systemuser", "restuser");
-	public static final String REST_PASS = System.getProperty("org.exoplatform.bonita.systempassword", "restbpm");
-	public static final int PORT = Integer.parseInt(System.getProperty("org.exoplatform.bonita.port", "8080"));
-	public static final String HOST = System.getProperty("org.exoplatform.bonita.host", "localhost");
-	private static final String DEFAULT_USER_PASSWORD = System.getProperty("org.exoplatform.bonita.default.password", "!p@ssw0rd!");
-	private static final String DEFAULT_GROUP = System.getProperty("org.exoplatform.bonita.default.group", "Consulting");
-	private static final String DEFAULT_ROLE = System.getProperty("org.exoplatform.bonita.default.role", "member");
+	public static final String REST_USER = System.getProperty("org.exoplatform.bonita.systemuser", "restuser").trim();
+	public static final String REST_PASS = System.getProperty("org.exoplatform.bonita.systempassword", "restbpm").trim();
+	public static final int PORT = Integer.parseInt(System.getProperty("org.exoplatform.bonita.port", "8080").trim());
+	public static final String HOST = System.getProperty("org.exoplatform.bonita.host", "localhost").trim();
+	private static final String DEFAULT_USER_PASSWORD = System.getProperty("org.exoplatform.bonita.default.password", "!p@ssw0rd!").trim();
+	private static final String DEFAULT_GROUP = System.getProperty("org.exoplatform.bonita.default.group", "Consulting").trim();
+	private static final String DEFAULT_ROLE = System.getProperty("org.exoplatform.bonita.default.role", "member").trim();
 
 	private APISession session = null;
 
@@ -211,10 +212,11 @@ public class BonitaService implements ResourceContainer {
 
 	}
 
-	private User getUser(String username) throws BonitaHomeNotSetException, ServerAPIException, UnknownAPITypeException, CreationException {
+	private User getUser(String username) throws BonitaHomeNotSetException, ServerAPIException, UnknownAPITypeException, CreationException, LoginException {
 		IdentityAPI identityAPI = TenantAPIAccessor.getIdentityAPI(session);
 		boolean addUser = false;
 		User user = null;
+
 		try {
 			user = identityAPI.getUserByUserName(username);
 			if (logger.isDebugEnabled()) {
@@ -225,7 +227,15 @@ public class BonitaService implements ResourceContainer {
 				logger.debug("User "+username+" does'nt exist in Bonita => add it");
 			}
 			addUser=true;
+		} catch (InvalidSessionException e) {
+			//this catch error when session is not ok (for example bonita server has restart without exo restart
+			//so create a new session and return getUser
+			session=TenantAPIAccessor.getLoginAPI().login(REST_USER,REST_PASS);
+			return getUser(username);
+
+
 		}
+
 		if (addUser) {
 			String firstname="";
 			String lastname ="";
