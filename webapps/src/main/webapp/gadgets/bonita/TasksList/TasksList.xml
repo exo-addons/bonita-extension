@@ -36,7 +36,7 @@
                    var redirect = "/bonita/console/homepage?ui=form#form="+name+"$entry&username="+username+"&task="+id+"&mode=form";
                    var content = "Task "+name;
                    var bonitaLink= "http://"+host+":"+port+"/bonita/getForm?username="+username+"&redirect="+redirect;
-                   var link="/portal/intranet/workflow?url=http://"+host+":"+port+encodeURIComponent(bonitaLink);
+                   var link="/portal/intranet/workflow?url="+encodeURIComponent(bonitaLink);
 
 			//use bonitaLink to open the form in a new tab, with a target=_blank in tag a
 			//use link to have to form in an iframe in the portal with a target=_parent in the tag a
@@ -81,3 +81,4 @@
     ]]>
 	</Content>
 </Module>
+
