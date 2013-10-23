@@ -3,14 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<definitionId>webdav</definitionId>
-	<definitionVersion>1.0.0</definitionVersion>
+	<definitionVersion>2.0.0</definitionVersion>
     <description>Implementation based eXoPlatform 4.0</description>
 	<implementationClassname>org.exoplatform.bonitaextension.connectors.webdav.UploadNewDocument</implementationClassname>
 	<implementationId>webdav-impl</implementationId>
-	<implementationVersion>1.0.0</implementationVersion>
+	<implementationVersion>2.0.0</implementationVersion>
 <jarDependencies>
-    <jarDependency>bonita-connector-webdav-uploadDocument-impl-1.0.0-SNAPSHOT.jar</jarDependency>
-    <jarDependency>bonita-connector-webdav-common-1.0.0-SNAPSHOT.jar</jarDependency>
+    <jarDependency>bonita-connector-webdav-uploadDocument-impl-2.0.0-SNAPSHOT.jar</jarDependency>
+    <jarDependency>bonita-connector-webdav-common-2.0.0-SNAPSHOT.jar</jarDependency>
     <jarDependency>commons-httpclient-3.1.jar</jarDependency>
     <jarDependency>jackrabbit-webdav-1.6.4.jar</jarDependency>
 

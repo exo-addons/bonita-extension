@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <implementation:connectorImplementation xmlns:implementation="http://www.bonitasoft.org/ns/connector/implementation/6.0">
   <implementationId>craUploadProcessVariables-impl</implementationId>
-  <implementationVersion>1.0.0</implementationVersion>
+  <implementationVersion>2.0.0</implementationVersion>
   <definitionId>craUploadProcessVariables</definitionId>
-  <definitionVersion>1.0.0</definitionVersion>
+  <definitionVersion>2.0.0</definitionVersion>
   <implementationClassname>org.exoplatform.consulting.CraUploadProcessVariablesImpl</implementationClassname>
   <hasSources>true</hasSources>
   <jarDependencies>
-    <jarDependency>craUploadProcessVariables-impl-1.0.0.jar</jarDependency>
+    <jarDependency>bonita-connector-consulting-compute-impl-2.0.0-SNAPSHOT.jar</jarDependency>
   </jarDependencies>
 </implementation:connectorImplementation>

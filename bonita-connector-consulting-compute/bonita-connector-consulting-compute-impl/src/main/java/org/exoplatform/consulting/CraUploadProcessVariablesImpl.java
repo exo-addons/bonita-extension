@@ -3,15 +3,15 @@
  */
 package org.exoplatform.consulting;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.FileNameMap;
-import java.net.URLConnection;
-
 import org.bonitasoft.engine.bpm.document.DocumentValue;
 import org.bonitasoft.engine.connector.ConnectorException;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.FileNameMap;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  *The connector execution will follow the steps
@@ -108,9 +108,17 @@ public class CraUploadProcessVariablesImpl extends
 			destinationUri+="/";
 		}
 
-		destinationUri+=customer+"/";
+		try {
+			destinationUri+= URLEncoder.encode(customer,"UTF-8")+"/";
+		} catch (UnsupportedEncodingException e) {
+			destinationUri+= customer+"/";
+		}
+		try {
+			destinationUri+=URLEncoder.encode(salesOrder,"UTF-8")+"/";
+		} catch (UnsupportedEncodingException e) {
+			destinationUri+=salesOrder+"/";
+		}
 
-		destinationUri+=salesOrder+"/";
 
 		String fileName = year + "-";
 		if (weekOrMonth.equals("Week")) {
@@ -119,7 +127,30 @@ public class CraUploadProcessVariablesImpl extends
 			fileName +="M";
 		}
 		fileName+=weekOrMonthNumber+"-";
-		fileName+=customer +"-"+projectName+"-"+username+"-"+type;
+
+		String customerEncoded = "";
+		try {
+			customerEncoded=URLEncoder.encode(customer,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			customerEncoded=customer;
+		}
+
+		String projectNameEncoded = "";
+		try {
+			projectNameEncoded=URLEncoder.encode(projectName,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			projectNameEncoded=projectName;
+		}
+
+		String usernameEncoded = "";
+		try {
+			usernameEncoded=URLEncoder.encode(username,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			usernameEncoded=username;
+		}
+
+
+		fileName+=customerEncoded +"-"+projectNameEncoded+"-"+usernameEncoded+"-"+type;
 
 
 		int lastIndex = file.getFileName().lastIndexOf(".");
