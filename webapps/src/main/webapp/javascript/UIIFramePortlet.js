@@ -27,7 +27,7 @@ eXo.IFramePortlet = {
       portletFrag.css("overflow", "hidden");
 
       if (!portletFrag[0].style.height) {
-        portletFrag[0].style.height = "400px";
+        portletFrag[0].style.height = "576px";
         var iframe = frameDiv.children("iframe").eq(0);
         if (iframe[0].offsetHeight < frameDiv[0].offsetHeight) {
           iframe.css("height", frameDiv[0].offsetHeight + "px");
