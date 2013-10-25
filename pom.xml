@@ -21,6 +21,7 @@
 		<module>config</module>
 		<module>webapps</module>
 		<module>bonita-services</module>
+		<module>packaging</module>
 	</modules>
 
 </project>
