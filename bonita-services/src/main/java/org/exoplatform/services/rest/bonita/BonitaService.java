@@ -62,7 +62,7 @@ public class BonitaService implements ResourceContainer {
 	public static final int PORT = Integer.parseInt(System.getProperty("org.exoplatform.bonita.port", "8080").trim());
 	public static final String HOST = System.getProperty("org.exoplatform.bonita.host", "localhost").trim();
 	private static final String DEFAULT_USER_PASSWORD = System.getProperty("org.exoplatform.bonita.default.password", "!p@ssw0rd!").trim();
-	private static final String DEFAULT_GROUP = System.getProperty("org.exoplatform.bonita.default.group", "Consulting").trim();
+	private static final String DEFAULT_GROUP = System.getProperty("org.exoplatform.bonita.default.group", "consulting").trim();
 	private static final String DEFAULT_ROLE = System.getProperty("org.exoplatform.bonita.default.role", "member").trim();
 
 	private APISession session = null;
