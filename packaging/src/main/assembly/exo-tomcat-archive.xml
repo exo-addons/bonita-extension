@@ -1,0 +1,81 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.1 http://maven.apache.org/xsd/assembly-1.1.1.xsd">
+	<id>tomcat</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+
+
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${exo.folder.name}</directory>
+			<outputDirectory>/</outputDirectory>
+			<excludes>
+				<exclude>**/*.sh</exclude>
+				<exclude>lib/httpclient-4.1.2.jar</exclude>
+				<exclude>lib/httpcore-4.1.2.jar</exclude>
+				<exclude>gatein/conf/configuration.properties</exclude>
+			</excludes>
+
+
+		</fileSet>
+		<fileSet>
+			<directory>${exo.folder.name}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.sh</include>
+			</includes>
+			<fileMode>755</fileMode>
+		</fileSet>
+
+		<fileSet>
+			<directory>${bonita.folder.name}/bonita/client</directory>
+			<outputDirectory>/bonita/client</outputDirectory>
+			<excludes>
+				<exclude>conf/bonita-client.properties</exclude>
+
+			</excludes>
+
+		</fileSet>
+
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>bonita/**</include>
+				<include>gatein/**</include>
+				<include>bin/**</include>
+			</includes>
+		</fileSet>
+
+	</fileSets>
+
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>lib/</outputDirectory>
+			<includes>
+				<include>org.ow2.bonita.engine:bonita-client:jar</include>
+				<include>org.ow2.bonita.engine:bonita-common:jar</include>
+				<include>org.apache.httpcomponents:httpmime:jar</include>
+				<include>org.apache.httpcomponents:httpcore:jar</include>
+				<include>org.apache.httpcomponents:httpclient:jar</include>
+ 				<include>org.exoplatform.bonita-extension:bonita-extension-config:jar</include>
+				<include>org.exoplatform.bonita-extension:bonita-extension-services:jar</include>
+
+			</includes>
+
+		</dependencySet>
+		<dependencySet>
+			<outputDirectory>webapps/</outputDirectory>
+			<includes>
+				<include>org.exoplatform.bonita-extension:bonita-extension-webapps:war</include>
+			</includes>
+			<outputFileNameMapping>
+				bonita-extension.war
+			</outputFileNameMapping>
+
+		</dependencySet>
+	</dependencySets>
+
+</assembly>

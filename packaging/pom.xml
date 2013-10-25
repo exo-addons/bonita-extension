@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.exoplatform.bonita-extension</groupId>
+		<artifactId>bonita-extension</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>bonita-extension-packaging</artifactId>
+	<name>Platform for Bonita - Packaging</name>
+	<description>eXo Platform for Bonita - Packaging</description>
+
+	<properties>
+		<exo.folder.name>/home/romain/exo/exo-dependencies/platform-4.0.2-CP01</exo.folder.name>
+		<bonita.folder.name>/home/romain/exo/exo-dependencies/BonitaBPMCommunity-6.0.3-Tomcat-6.0.35</bonita.folder.name>
+	</properties>
+
+
+	<build>
+		<finalName>eXo-Platform-bonita</finalName>
+		<plugins>
+			<!-- Ensure your environment is correctly setup -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>check-environment-ready</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireProperty>
+									<property>exo.folder.name</property>
+									<message>You must define the property exo.folder.name :
+										give the path to the directory where you unzip eXo
+									</message>
+								</requireProperty>
+								<requireProperty>
+									<property>bonita.folder.name</property>
+									<message>You must define the property bonita.folder.name :
+										give the path to the directory where you unzip bonita
+									</message>
+								</requireProperty>
+								<requireFilesExist>
+									<files>
+										<file>${exo.folder.name}/
+										</file>
+									</files>
+									<message>The following directory doesn't exist :
+										${exo.folder.name}
+									</message>
+								</requireFilesExist>
+
+								<requireFilesExist>
+									<files>
+										<file>${bonita.folder.name}/
+										</file>
+									</files>
+									<message>The following directory doesn't exist :
+										${bonita.folder.name}
+									</message>
+								</requireFilesExist>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<!-- Unpack bonita.war from repository -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>unpackBonitaWar</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<tasks>
+								<echo message="prepare phase" />
+								<unzip src="${bonita.folder.name}/webapps/bonita.war" dest="${project.build.directory}/bonita-war" />
+
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- copy the filter need for integration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copyFilter</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.exoplatform.bonita-extension</groupId>
+									<artifactId>bonita-extension-filter</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>${project.build.directory}/bonita-war/WEB-INF/lib</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copyWebXml</id>
+						<!-- here the phase you need -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/bonita-war/WEB-INF</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/webapps/bonita/WEB-INF</directory>
+									<includes>
+										<include>web.xml</include>
+									</includes>
+								</resource>
+							</resources>
+							<overwrite>true</overwrite>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<!-- build bonita war-->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>package-war-bonita</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/bonita-war-archive.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>bonita</finalName>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- build exo package -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>package-tomcat-exo</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/exo-tomcat-archive.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>eXo-Platform-bonita-extension</finalName>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<!-- update port for bonita, change 8080 to 9090 -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copyServerXml</id>
+						<!-- here the phase you need -->
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/bonita-resources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${bonita.folder.name}/conf</directory>
+									<includes>
+										<include>server.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<id>modifyServerXml</id>
+
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<file>target/bonita-resources/server.xml</file>
+					<replacements>
+						<replacement>
+							<token>80</token>
+							<value>90</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<!-- build bonita package -->
+
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>package-tomcat-bonita</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/bonita-archive.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>bonita-server</finalName>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ow2.bonita.engine</groupId>
+			<artifactId>bonita-client</artifactId>
+			<version>${bonita.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ow2.bonita.engine</groupId>
+			<artifactId>bonita-common</artifactId>
+			<version>${bonita.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.exoplatform.bonita-extension</groupId>
+			<artifactId>bonita-extension-config</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.exoplatform.bonita-extension</groupId>
+			<artifactId>bonita-extension-services</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.exoplatform.bonita-extension</groupId>
+			<artifactId>bonita-extension-webapps</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+
+
+
+
+
+	</dependencies>
+</project>
