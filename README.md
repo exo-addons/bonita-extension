@@ -9,7 +9,77 @@ Prerequisites
 This extension is actually tested on eXoPlatform 4.0.2. It should work will next 4.0.x version without modifications.
 Bonita version used is 6.0.3. Some tests will be needed to use it on next Bonita version
 
-Installation steps :
+Automatic build
+=====================
+Get Bonita Community : 
+----------------------
+http://www.bonitasoft.com/products/download-bpm-software-and-documentation : download the version bundled with tomcat.
+I used 6.0.3. Unzip it on your disk. This will be the dependency source folder for bonita : $BONITA_DEPENDENCY_FOLDER. 
+
+Get eXoPlatform : 
+----------------- 
+you can find it on community platform : http://community.exoplatform.com/portal/intranet/
+Unzip it on your disk. This will be the dependency source folder : $EXO_DEPENDENCY_FOLDER
+
+Build :
+---------
+In packaging/pom.xml, set properties exo.folder.name and bonita.folder.name with value above :
+	
+	<properties>
+		<exo.folder.name>/home/romain/exo/exo-dependencies/platform-4.0.2-CP01</exo.folder.name>
+		<bonita.folder.name>/home/romain/exo/exo-dependencies/BonitaBPMCommunity-6.0.3-Tomcat-6.0.35</bonita.folder.name>
+	</properties>
+
+
+Go at root folder of the extension, and type
+
+	mvn clean install
+	
+When finished, go in packaging/target/, you have 2 zip : bonita-server.zip and eXo-Platform-bonita-extension.zip. These are the 2 servers used and preconfigured.
+
+Start Bonita :
+----------
+Unzip bonita-server.zip in $BONITA_HOME
+Launch $BONITA_HOME/bin/catalina.sh run
+When server is started, go on http://localhost:9090/bonita
+
+We first have to create the system user. System user is the user which eXo will use to get process and tasks. He is defined in $EXO_HOME/gatein/conf/configuration.properties :
+	
+	org.exoplatform.bonita.systemuser=john
+	org.exoplatform.bonita.systempassword=!p@ssw0rd!
+
+For first connection on Bonita, use technical user install/install
+Then create a new user : john with password : !p@ssw0rd!
+Go in tab "Configuration" -> "User Rights", and add John in profiles "Administrators" and "Users".
+Logout 
+Login with john.
+We will define default group and membership for Bonita. 
+With bonita, it is possible to synchronize these information from an existing LDAP.
+
+Switch to "Administrator" view. Add a new group, named "consulting". Add a new role named "member". This correspond to properties 
+
+	org.exoplatform.bonita.default.group=consulting
+	org.exoplatform.bonita.default.role=member
+	
+in $EXO_HOME/gatein/conf/configuration.properties
+
+Go in "Configuration" -> "User rights", and select profile User. Edit it by adding a "Group Mapping" on group "consulting". With this, all users of consulting group will have profile "user" in bonita.
+
+Go to "Apps Management" -> "Apps", and Install a new Apps. Select bar file in bonita-sample folder. Assign it ot group "consulting" -> all users in consulting group will be able to start this workflow.
+Enable the workflow.
+
+Start eXo :
+---------
+Unzip  eXo-Platform-bonita-extension.zip in $EXO_HOME
+Launch $EXO_HOME/start_eXo.sh
+When server is started, go on http://localhost:8080/portal
+Create the first user with informations you want. Just set "password" as password for root (this is used in the sample workflow).
+
+On Homepage, you can see the ProcessList Gadget. Click on the link, fill the form, attach a file, and save. Go in File explorer, drive "Collaboration". A new fodler "Documents" was created with subfolder in function of what you enter in the form.
+
+
+
+Manual build
 =====================
 
 Get Bonita Community : 
@@ -142,14 +212,9 @@ Launch Bonita Server, eXo server, and connect on eXo server. On main page of int
 
 TODO : 
 ------
-- Finalize documentation (add part about connectors)
 - Add connector for activity stream 
-- Do packaging
 - Improve default params utilisation
-- Css corrections on iframe display
-- add a trim on properties
-- add title on gadgets
-	
+
 
 
 Note about build 
