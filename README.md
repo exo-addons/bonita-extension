@@ -48,13 +48,13 @@ We first have to create the system user. System user is the user which eXo will 
 	org.exoplatform.bonita.systemuser=john
 	org.exoplatform.bonita.systempassword=!p@ssw0rd!
 
-For first connection on Bonita, use technical user install/install
-Then create a new user : john with password : !p@ssw0rd!
-Go in tab "Configuration" -> "User Rights", and add John in profiles "Administrators" and "Users".
-Logout 
-Login with john.
-We will define default group and membership for Bonita. 
-With bonita, it is possible to synchronize these information from an existing LDAP.
+For first connection on Bonita, use technical user install/install  
+Then create a new user : john with password : !p@ssw0rd!  
+Go in tab "Configuration" -> "User Rights", and add John in profiles "Administrators" and "Users".  
+Logout  
+Login with john.  
+We will define default group and membership for Bonita.   
+With bonita, it is possible to synchronize these information from an existing LDAP.  
 
 Switch to "Administrator" view. Add a new group, named "consulting". Add a new role named "member". This correspond to properties 
 
