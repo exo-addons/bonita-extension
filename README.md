@@ -184,11 +184,11 @@ Process example :
 ------------------
 In extension, we have a process exemple, named CRAUpload. This process will allow eXo consultants to upload CRA on an eXo instance using webdav. This process is present on github as bos extension. You have to upload it bonita studio, then configure connecteurs to allow them to upload documents.
 Default parameters are :
-- baseDestinationUri : by default it is /Users/r___/ro___/roo___/root/Public
-- host : exo server host : by default : 192.168.0.7
+- baseDestinationUri : by default it is /Documents
+- host : exo server host : by default : localhost
 - port : exo server port : by default : 8080
 - systemUser : the user which will really do the webdav upload : by default : root
-- password : the password for this user : by default : gtn
+- password : the password for this user : by default : password
 	
 Then, the document uploaded in form will be stored by systemUser in /baseDestinationUri/{customerName}/{SalesOrder}/year-{W-S}weekOrMonthNumber-customer-project-username-{CRA-AS}.docExtension
 The username in the file name is the name of the actor of the workflow, not the name set in systemUser.	
