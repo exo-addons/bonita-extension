@@ -6,6 +6,8 @@ import org.bonitasoft.engine.api.ProcessRuntimeAPI;
 import org.bonitasoft.engine.api.TenantAPIAccessor;
 import org.bonitasoft.engine.bpm.flownode.ActivityInstanceCriterion;
 import org.bonitasoft.engine.bpm.flownode.HumanTaskInstance;
+import org.bonitasoft.engine.bpm.process.ProcessDefinition;
+import org.bonitasoft.engine.bpm.process.ProcessDefinitionNotFoundException;
 import org.bonitasoft.engine.bpm.process.ProcessDeploymentInfo;
 import org.bonitasoft.engine.bpm.process.ProcessDeploymentInfoCriterion;
 import org.bonitasoft.engine.exception.*;
@@ -166,6 +168,8 @@ public class BonitaService implements ResourceContainer {
 
 			//getTaskList
 			ProcessRuntimeAPI processRuntimeAPI = TenantAPIAccessor.getProcessAPI(session);
+			ProcessManagementAPI processManagementAPI = TenantAPIAccessor.getProcessAPI(session);
+
 			List<HumanTaskInstance> assignedHumanTaskInstances = processRuntimeAPI.getAssignedHumanTaskInstances(user.getId(), 0, 10, ActivityInstanceCriterion.DEFAULT);
 
 
@@ -179,7 +183,14 @@ public class BonitaService implements ResourceContainer {
 			//extract long for store it in String
 			List<ExoHumanTaskInstance> eXohumanTasks = new ArrayList<ExoHumanTaskInstance>();
 			for (HumanTaskInstance hti : assignedHumanTaskInstances) {
-				eXohumanTasks.add(new ExoHumanTaskInstance(hti, HOST,PORT,username));
+				ProcessDefinition processDefinition =null;
+				try {
+					processDefinition = processManagementAPI.getProcessDefinition(hti.getProcessDefinitionId());
+				} catch (ProcessDefinitionNotFoundException e){
+
+				}
+
+				eXohumanTasks.add(new ExoHumanTaskInstance(hti, HOST,PORT,username, processDefinition));
 			}
 
 
