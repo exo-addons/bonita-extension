@@ -2,13 +2,14 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.bonitasoft.connectors</groupId>
 	<artifactId>bonita-connector-webdav</artifactId>
 	<packaging>pom</packaging>
 	<version>2.0.0-SNAPSHOT</version>
 
 	<parent>
-		<groupId>org.exoplatform.bonita-extension</groupId>
-	        <artifactId>bonita-extension</artifactId>
+		<groupId>org.exoplatform.addons.bonita</groupId>
+		<artifactId>bonita-extension</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 
 	</parent>

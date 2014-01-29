@@ -2,17 +2,18 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.exoplatform.bonita-extension</groupId>
+	<groupId>org.exoplatform.addons.bonita</groupId>
 	<artifactId>bonita-extension</artifactId>
 	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<parent>
-		<artifactId>platform</artifactId>
-		<groupId>org.exoplatform.platform</groupId>
-		<version>4.0.1</version>
+		<artifactId>addons-parent-pom</artifactId>
+		<groupId>org.exoplatform.addons</groupId>
+		<version>2</version>
 	</parent>
 	<properties>
-		<bonita.version>6.0.3</bonita.version>
+		<bonita.version>6.2.1</bonita.version>
+		<exoplatform.version>4.0.4</exoplatform.version>
 	</properties>
 	<modules>
 		<!--module>bonita-connector-webdav</module>
@@ -23,5 +24,18 @@
 		<module>bonita-services</module>
 		<module>packaging</module>
 	</modules>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<dependency>
+				<groupId>org.exoplatform.platform</groupId>
+				<artifactId>platform</artifactId>
+				<version>${exoplatform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

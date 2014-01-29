@@ -55,22 +55,23 @@
 		<dependencySet>
 			<outputDirectory>lib/</outputDirectory>
 			<includes>
-				<include>org.ow2.bonita.engine:bonita-client:jar</include>
-				<include>org.ow2.bonita.engine:bonita-common:jar</include>
+				<include>org.bonitasoft.engine:bonita-client:jar</include>
+				<include>org.bonitasoft.engine:bonita-common:jar</include>
 				<include>org.apache.httpcomponents:httpmime:jar</include>
 				<include>org.apache.httpcomponents:httpcore:jar</include>
 				<include>org.apache.httpcomponents:httpclient:jar</include>
- 				<include>org.exoplatform.bonita-extension:bonita-extension-config:jar</include>
-				<include>org.exoplatform.bonita-extension:bonita-extension-services:jar</include>
+ 				<include>org.exoplatform.addons.bonita:bonita-extension-config:jar</include>
+				<include>org.exoplatform.addons.bonita:bonita-extension-services:jar</include>
 
 			</includes>
-
+			<scope>provided</scope>
 		</dependencySet>
 		<dependencySet>
 			<outputDirectory>webapps/</outputDirectory>
 			<includes>
-				<include>org.exoplatform.bonita-extension:bonita-extension-webapps:war</include>
+				<include>org.exoplatform.addons.bonita:bonita-extension-webapps:war</include>
 			</includes>
+			<scope>provided</scope>
 			<outputFileNameMapping>
 				bonita-extension.war
 			</outputFileNameMapping>
