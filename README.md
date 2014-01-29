@@ -36,6 +36,8 @@ When finished, go in packaging/target/, you have 3 zip :
 
 
 # Install
+You can manually build eXo and bonita packages. For this, follow [Manual Build Instructions](https://github.com/exo-addons/bonita-extension/wiki/Manual Build)
+
 ## Install Bonita
 Unzip bonita-server.zip in $BONITA_HOME
 Launch $BONITA_HOME/bin/catalina.sh run
@@ -120,6 +122,8 @@ Then edit file $EXO_HOME/gatein/conf/configuration.properties and add this at th
 ### Builded version : 	
 If you prefer to take the version builded :
 Unzip  eXo-Platform-bonita-extension.zip in $EXO_HOME
+
+
 
 # Start
 Launch $EXO_HOME/start_eXo.sh
