@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="all-in-one" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="console-war" version="2.5">
 	<display-name>Bonita</display-name>
 
 
@@ -21,8 +24,8 @@
 	</filter>
 	<!-- SSO filter -->
 	<filter>
-		<filter-name>SSOFilter</filter-name>
-		<filter-class>org.bonitasoft.console.common.server.sso.filter.SSOFilter</filter-class>
+		<filter-name>InternalSSOFilter</filter-name>
+		<filter-class>org.bonitasoft.console.common.server.sso.filter.InternalSSOFilter</filter-class>
 	</filter>
 	<!-- Cache Filter -->
 	<filter>
@@ -99,28 +102,28 @@
 		<url-pattern>/API/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>SSOFilter</filter-name>
-		<url-pattern>/console/BonitaConsole.html</url-pattern>
+		<filter-name>InternalSSOFilter</filter-name>
+		<url-pattern>/portal/BonitaConsole.html</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>SSOFilter</filter-name>
-		<url-pattern>/console/homepage</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>AuthorizationFilter</filter-name>
-		<url-pattern>/console/BonitaConsole.html</url-pattern>
+		<filter-name>InternalSSOFilter</filter-name>
+		<url-pattern>/portal/homepage</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>AuthorizationFilter</filter-name>
-		<url-pattern>/console/homepage</url-pattern>
+		<url-pattern>/portal/BonitaConsole.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>/portal/homepage</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>BPMURLSupportFilter</filter-name>
-		<url-pattern>/console/BonitaConsole.html</url-pattern>
+		<url-pattern>/portal/BonitaConsole.html</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>BPMURLSupportFilter</filter-name>
-		<url-pattern>/console/homepage</url-pattern>
+		<url-pattern>/portal/homepage</url-pattern>
 	</filter-mapping>
 	<!-- Cache Filter Mapping Start -->
 	<filter-mapping>
@@ -145,30 +148,32 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ApplicationResourceCacheFilter</filter-name>
-		<url-pattern>/console/applicationResource</url-pattern>
+		<url-pattern>/portal/applicationResource</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ApplicationResourceCacheFilter</filter-name>
-		<url-pattern>/console/themeResource</url-pattern>
+		<url-pattern>/portal/themeResource</url-pattern>
 	</filter-mapping>
 	<!-- Cache Filter Mapping End -->
 
+	<!-- Shutdown properly ehcache on tomcat shutdown -->
 	<listener>
-		<listener-class>
-			org.bonitasoft.console.server.listener.ConsoleContextListener
-		</listener-class>
+		<listener-class>net.sf.ehcache.constructs.web.ShutdownListener</listener-class>
 	</listener>
-	
-	<!-- Platform and tenant context listener -->
+	<!-- Platform and tenant listeners -->
+	<!-- For Apps containing the engine server -->
+
 	<listener>
-		<listener-class>
-			org.bonitasoft.console.common.server.servlet.PlatformTenantListener
-		</listener-class>
+		<listener-class>org.bonitasoft.engine.api.internal.servlet.EngineInitializerListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.bonitasoft.console.common.server.servlet.PlatformTenantListener</listener-class>
 	</listener>
 
 	<servlet>
-		<servlet-name>ConsoleAPIServlet</servlet-name>
-		<servlet-class>org.bonitasoft.console.server.ConsoleAPIServlet</servlet-class>
+		<servlet-name>BonitaRestAPIServlet</servlet-name>
+		<servlet-class>org.bonitasoft.web.rest.server.BonitaRestAPIServlet</servlet-class>
 	</servlet>
 
 	<servlet>
@@ -202,10 +207,10 @@
 		<servlet-class>org.bonitasoft.console.common.server.servlet.TenantFileUploadServlet</servlet-class>
 		<init-param>
 			<param-name>SupportedExtensions</param-name>
-			<param-value>png,jpg,gif</param-value>
+			<param-value>png,jpg,gif,jpeg,bmp,wbmp,tga</param-value>
 		</init-param>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>attachmentImage</servlet-name>
 		<servlet-class>org.bonitasoft.console.common.server.servlet.TenantImageServlet</servlet-class>
@@ -218,7 +223,10 @@
 		<servlet-name>logoutService</servlet-name>
 		<servlet-class>org.bonitasoft.console.common.server.login.servlet.LogoutServlet</servlet-class>
 	</servlet>
-
+    <servlet>
+        <servlet-name>exportOrganizationServlet</servlet-name>
+        <servlet-class>org.bonitasoft.console.server.servlet.OrganizationExportServlet</servlet-class>
+    </servlet>
 	<servlet>
 		<servlet-name>org.bonitasoft.forms.server.FormsServletconsole/formsservice</servlet-name>
 		<servlet-class>org.bonitasoft.forms.server.FormsServlet</servlet-class>
@@ -226,7 +234,7 @@
 	<servlet>
 		<servlet-name>org.bonitasoft.forms.server.FormLayoutDownloadServletconsole/formLayoutDownload</servlet-name>
 		<servlet-class>org.bonitasoft.forms.server.FormLayoutDownloadServlet</servlet-class>
-	</servlet>	
+	</servlet>
 	<servlet>
 		<servlet-name>org.bonitasoft.forms.server.ApplicationResourceServletconsole/applicationResource</servlet-name>
 		<servlet-class>org.bonitasoft.forms.server.ApplicationResourceServlet</servlet-class>
@@ -235,7 +243,7 @@
 	<!-- download -->
 	<servlet>
 		<servlet-name>documentDownload</servlet-name>
-		<servlet-class>org.bonitasoft.console.common.server.document.servlet.DocumentDownloadServlet</servlet-class>
+		<servlet-class>org.bonitasoft.console.common.server.servlet.DocumentDownloadServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>formsDocumentDownload</servlet-name>
@@ -245,6 +253,10 @@
 		<servlet-name>formsDocumentImage</servlet-name>
 		<servlet-class>org.bonitasoft.forms.server.DocumentImageServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+        <servlet-name>exportOrganizationServlet</servlet-name>
+        <url-pattern>/portal/exportOrganization</url-pattern>
+    </servlet-mapping>
 	<servlet>
 		<servlet-name>exportProcessActorsServlet</servlet-name>
 		<servlet-class>org.bonitasoft.console.server.servlet.ProcessActorsExportServlet</servlet-class>
@@ -257,33 +269,28 @@
 	<!-- End SSO -->
 	<!-- theme -->
 	<servlet>
-		<servlet-name>org.bonitasoft.console.common.server.themes.ThemeResourceServletconsole/themeResource</servlet-name>
+		<servlet-name>themeResource</servlet-name>
 		<servlet-class>org.bonitasoft.console.common.server.themes.ThemeResourceServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>org.bonitasoft.console.common.server.themes.ThemeUploadServlet/console/themeUpload</servlet-name>
-		<servlet-class>org.bonitasoft.console.common.server.themes.ThemeUploadServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>org.bonitasoft.forms.server.HomepageServletconsole/homepage</servlet-name>
+		<servlet-name>homepage</servlet-name>
 		<servlet-class>org.bonitasoft.forms.server.HomepageServlet</servlet-class>
 	</servlet>
-    <!-- End theme -->
+	<!-- End theme -->
+    <!-- For engine HTTP API -->
+
 	<servlet>
 		<servlet-name>HttpAPIServlet</servlet-name>
 		<servlet-class>org.bonitasoft.engine.api.internal.servlet.HttpAPIServlet</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
-		<servlet-name>org.bonitasoft.forms.server.HomepageServletconsole/homepage</servlet-name>
-		<url-pattern>/console/homepage</url-pattern>
+		<servlet-name>homepage</servlet-name>
+		<url-pattern>/portal/homepage</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>org.bonitasoft.console.common.server.themes.ThemeUploadServlet/console/themeUpload</servlet-name>
-		<url-pattern>/console/themeUpload</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>org.bonitasoft.console.common.server.themes.ThemeResourceServletconsole/themeResource</servlet-name>
-		<url-pattern>/console/themeResource</url-pattern>
+		<servlet-name>themeResource</servlet-name>
+		<url-pattern>/portal/themeResource</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SSOService</servlet-name>
@@ -291,43 +298,43 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>processUploadServlet</servlet-name>
-		<url-pattern>/console/processUpload</url-pattern>
+		<url-pattern>/portal/processUpload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>xmlUploadServlet</servlet-name>
-		<url-pattern>/console/organizationUpload</url-pattern>
+		<url-pattern>/portal/organizationUpload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>xmlUploadServlet</servlet-name>
-		<url-pattern>/console/actorsUpload</url-pattern>
+		<url-pattern>/portal/actorsUpload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>imageUploadServlet</servlet-name>
-		<url-pattern>/console/imageUpload</url-pattern>
+		<url-pattern>/portal/imageUpload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>fileUploadServlet</servlet-name>
-		<url-pattern>/console/fileUpload</url-pattern>
+		<url-pattern>/portal/fileUpload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>exportProcessActorsServlet</servlet-name>
-		<url-pattern>/console/exportActors</url-pattern>
+		<url-pattern>/portal/exportActors</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>attachmentImage</servlet-name>
-		<url-pattern>/console/attachmentImage</url-pattern>
+		<url-pattern>/portal/attachmentImage</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>documentDownload</servlet-name>
-		<url-pattern>/console/documentDownload</url-pattern>
+		<url-pattern>/portal/documentDownload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>formsDocumentDownload</servlet-name>
-		<url-pattern>/console/formsDocumentDownload</url-pattern>
+		<url-pattern>/portal/formsDocumentDownload</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>formsDocumentImage</servlet-name>
-		<url-pattern>/console/formsDocumentImage</url-pattern>
+		<url-pattern>/portal/formsDocumentImage</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>loginService</servlet-name>
@@ -338,7 +345,7 @@
 		<url-pattern>/logoutservice</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>ConsoleAPIServlet</servlet-name>
+		<servlet-name>BonitaRestAPIServlet</servlet-name>
 		<url-pattern>/API/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -347,20 +354,23 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>org.bonitasoft.forms.server.FormsServletconsole/formsservice</servlet-name>
-		<url-pattern>/console/formsService</url-pattern>
+		<url-pattern>/portal/formsService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>org.bonitasoft.forms.server.ApplicationResourceServletconsole/applicationResource</servlet-name>
-		<url-pattern>/console/applicationResource</url-pattern>
+		<url-pattern>/portal/applicationResource</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>org.bonitasoft.forms.server.FormLayoutDownloadServletconsole/formLayoutDownload</servlet-name>
-		<url-pattern>/console/formLayoutDownload</url-pattern>
+		<url-pattern>/portal/formLayoutDownload</url-pattern>
 	</servlet-mapping>
+    <!-- For engine HTTP API -->
+
 	<servlet-mapping>
 		<servlet-name>HttpAPIServlet</servlet-name>
 		<url-pattern>/serverAPI/*</url-pattern>
 	</servlet-mapping>
+
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
