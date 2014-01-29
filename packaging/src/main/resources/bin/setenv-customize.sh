@@ -184,6 +184,13 @@
 #CATALINA_OPTS="${CATALINA_OPTS} -Dcrash.telnet.port=12345"
 #CATALINA_OPTS="${CATALINA_OPTS} -Dcrash.ssh.port=54321"
 
+# Hibernate dialect for supporting Postgresql Plus
+#CATALINA_OPTS="${CATALINA_OPTS} -Dhibernate.dialect=org.hibernate.dialect.PostgresPlusDialect"
+
+# ACME extension (override default acme site data)
+#CATALINA_OPTS="${CATALINA_OPTS} -Dacme.portalConfig.metadata.override=true"
+
+
 # Bonita extension
 BONITA_HOME="-Dbonita.home=${CATALINA_HOME}/bonita"
 CATALINA_OPTS="$CATALINA_OPTS ${BONITA_HOME}"

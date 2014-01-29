@@ -179,6 +179,11 @@ REM # CRaSH Extension (change telnet and SSH ports)
 REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dcrash.telnet.port=12345"
 REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dcrash.ssh.port=54321"
 
+REM # Hibernate dialect for supporting Postgresql Plus
+REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dhibernate.dialect=org.hibernate.dialect.PostgresPlusDialect"
+
+REM # ACME extension (override default acme site data)
+REM SET "CATALINA_OPTS=%CATALINA_OPTS% -Dacme.portalConfig.metadata.override=true"
 REM # Bonita extension
 SET "BONITA_HOME=-Dbonita.home=%CATALINA_HOME%/bonita"
 SET "CATALINA_OPTS=%CATALINA_OPTS% %BONITA_HOME%"
