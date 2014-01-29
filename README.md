@@ -8,6 +8,8 @@ This extension is actually tested on eXoPlatform 4.0.4. It should work will next
 Bonita version used is 6.2.1. Some tests will be needed to use it on next Bonita version
 
 # Build
+You can manually build eXo and bonita packages. For this, follow [Manual Build Instructions](https://github.com/exo-addons/bonita-extension/wiki/Manual Build)
+
 ## Get Bonita Community : 
 http://www.bonitasoft.com/products/download-bpm-software-and-documentation : download the version bundled with tomcat.
 I used 6.2.1 Unzip it on your disk. This will be the dependency source folder for bonita : $BONITA_DEPENDENCY_FOLDER. 
@@ -36,7 +38,7 @@ When finished, go in packaging/target/, you have 3 zip :
 
 
 # Install
-You can manually build eXo and bonita packages. For this, follow [Manual Build Instructions](https://github.com/exo-addons/bonita-extension/wiki/Manual Build)
+
 
 ## Install Bonita
 Unzip bonita-server.zip in $BONITA_HOME
