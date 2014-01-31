@@ -24,7 +24,11 @@
 		<module>bonita-services</module>
 		<module>packaging</module>
 	</modules>
-
+	<scm>
+	    <connection>scm:git:git://github.com/exo-addons/bonita-extension.git</connection>
+	    <developerConnection>scm:git:git@github.com:exo-addons/bonita-extension.git</developerConnection>
+	    <url>https://github.com/exo-addons/bonita-extension</url>
+	  </scm>
 	<dependencyManagement>
 
 		<dependencies>
@@ -37,5 +41,15 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<build>
+	    <plugins>
+	      <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-release-plugin</artifactId>
+		<version>2.4.2</version>
+	      </plugin>
+	    </plugins>
+	  </build>
 
 </project>
