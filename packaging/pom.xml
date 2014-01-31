@@ -109,7 +109,7 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>org.exoplatform.bonita-extension</groupId>
+									<groupId>org.exoplatform.addons.bonita</groupId>
 									<artifactId>bonita-extension-filter</artifactId>
 									<version>${project.version}</version>
 									<type>jar</type>
