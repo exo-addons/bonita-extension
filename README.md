@@ -189,3 +189,5 @@ You have not to build connectors to tests this extension, they are integrated in
 - Improve default params utilisation
 
 
+## Troubleshooting
+- If you fail to start the process from the gadget *Process List*, and you get the message "Access denied: you do not have the rights to view this page", please logout user from the Bonita Console and retry again.
