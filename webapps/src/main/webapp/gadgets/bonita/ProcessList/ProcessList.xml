@@ -27,6 +27,7 @@
                  $.each(data, function(i, process) {
                    var host = process.host;
                    var port = process.port;
+                   var homePage = process.home;
                    var username=process.username;
                    var name = process.processDeploymentInfo.name;
                    var version = process.processDeploymentInfo.version;
@@ -34,7 +35,8 @@
                    /*
                      Here we use simple solution to transfer  user id.
                    */
-                   var redirect = "/bonita/portal/homepage?ui=form#form="+name+"--"+version+"$entry&process="+id+"&mode=form";
+                   // bonita/console/homepage
+                   var redirect = homePage+"?ui=form#form="+name+"--"+version+"$entry&process="+id+"&mode=form";
                    var content = "Process "+name;
                    var bonitaLink = "http://"+host+":"+port+"/bonita/getForm?username="+username+"&redirect="+redirect; 
                    var link="/portal/intranet/workflow?url="+encodeURIComponent(bonitaLink);
