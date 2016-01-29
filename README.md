@@ -7,6 +7,8 @@ Add some tools in eXo to interact with an instance of Bonita. Bonita server and 
 This extension is actually tested on eXoPlatform 4.0.4. It should work will next 4.0.x version without modifications.
 Bonita version used is 6.2.1. Some tests will be needed to use it on next Bonita version
 
+If you need an example process, you can use this one https://github.com/Bonitasoft-Community/vacation-management-example, provided by Bonita.
+
 # Build
 You can manually build eXo and bonita packages. For this, follow [Manual Build Instructions](https://github.com/exo-addons/bonita-extension/wiki/Manual Build)
 
