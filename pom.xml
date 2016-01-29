@@ -8,10 +8,10 @@
 	<parent>
 		<groupId>org.exoplatform.addons</groupId>
 		<artifactId>addons-parent-pom</artifactId>
-		<version>4</version>
+		<version>5</version>
 	</parent>
 	<properties>
-		<bonita.version>7.0.2</bonita.version>
+
 		<exoplatform.version>4.3.0</exoplatform.version>
 		<juzu.version>1.0.0</juzu.version>
 	</properties>
@@ -37,15 +37,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-	    <plugins>
-	      <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-release-plugin</artifactId>
-		<version>2.4.2</version>
-	      </plugin>
-	    </plugins>
-	  </build>
 
 </project>
