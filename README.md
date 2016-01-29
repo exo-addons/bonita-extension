@@ -4,8 +4,8 @@ Add some tools in eXo to interact with an instance of Bonita. Bonita server and 
 
 # Prerequisites
 
-This extension is actually tested on eXoPlatform 4.0.4. It should work will next 4.0.x version without modifications.
-Bonita version used is 6.2.1. Some tests will be needed to use it on next Bonita version
+This extension is actually tested on eXoPlatform 4.2.0-RC1. It should work will next 4.2.x version without modifications.
+Bonita version used is 6.5.2. Some tests will be needed to use it on next Bonita version
 
 # Build
 You can manually build eXo and bonita packages. For this, follow [Manual Build Instructions](https://github.com/exo-addons/bonita-extension/wiki/Manual Build)
@@ -52,7 +52,7 @@ We first have to create the system user. System user is the user which eXo will 
 
 For first connection on Bonita, use technical user install/install  
 Then create a new user : john with password : !p@ssw0rd!  
-Go in tab "Configuration" -> "Profiles", and add John in profiles "Administrators" and "Users".  
+Go in tab "Organization" -> "Profiles", and add John in profiles "Administrators" and "Users".
 Logout  
 Login with john.  
 We will define default group and membership for Bonita.   
@@ -65,9 +65,9 @@ Switch to "Administrator" view. Add a new group, named "consulting". Add a new r
 	
 in $EXO_HOME/gatein/conf/configuration.properties
 
-Go in "Configuration" -> "Profiles", and select profile User. Edit it by adding a "Group Mapping" on group "consulting". With this, all users of consulting group will have profile "user" in bonita.
+Go in "Organization" -> "Profiles", and select profile User. Edit it by adding a "Group Mapping" on group "consulting". With this, all users of consulting group will have profile "user" in bonita.
 
-Go to "Apps Management" -> "Apps", and Install a new Apps. Select bar file in bonita-sample folder. Assign it ot group "consulting" -> all users in consulting group will be able to start this workflow.
+Go to "Process Management" -> "Process", and Install a new Apps. Select bar file in bonita-sample folder. Assign it ot group "consulting" -> all users in consulting group will be able to start this workflow.
 Enable the workflow.
 
 ## Install eXo :

@@ -1,0 +1,39 @@
+.uiTaskPortlet form .bonitaSettings {
+    width: 100%;
+    margin: 5px 5px;
+    padding: 5px;
+    height: 40px;
+}
+
+.uiTaskPortlet form .bonitaSettings label {
+    clear: both;
+    float: left;
+    padding-top: 3px;
+    margin: 10px 2px;
+}
+
+.uiTaskPortlet form .bonitaSettings input {
+    width: 175px;
+    float: right;
+    margin: 10px 20px;
+}
+
+
+.uiTaskPortlet form .buttonDiv {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.uiTaskPortlet .message {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.uiTaskPortlet .uiTaskContent, .uiTaskPortlet .uiProcessContent {
+    padding: 15px;
+}
+
+.uiTaskPortlet .uiTaskContent ul li, .uiTaskPortlet .uiProcessContent ul li{
+    list-style: disc;
+    margin-left:20px;
+}

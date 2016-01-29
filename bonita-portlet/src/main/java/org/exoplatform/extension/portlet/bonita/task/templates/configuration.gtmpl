@@ -1,0 +1,61 @@
+
+
+<div id="TaskPortlet" class="uiBox uiTaskPortlet">
+    <h6 class='title center'>&{bonita.header.configuration.label}</h6>
+
+    <%
+        if (!message.equals("")) {
+    %>
+        <span class="message center error"><%=message%></span>
+    <%
+        }
+    %>
+    <form id="bonitaSettingsForm" action="@{saveSettings()}" method="post" enctype="multipart/form-data">
+        <div class="bonitaSettings">
+            <label for='serverName'>&{bonita.url.configuration.label}</label>
+            <%
+                if(!bonitaUrl.equals("")) {
+            %>
+                    <input type='text' id='bonitaServerName' name='bonitaServerName' placeholder='https://server/' value='<%=bonitaUrl%>'>
+
+            <%
+                } else {
+            %>
+                    <input type='text' id='bonitaServerName' name='bonitaServerName' placeholder='https://server/'>
+            <%
+                }
+            %>
+
+        </div>
+        <div class="bonitaSettings">
+            <label for='username'>&{bonita.username.configuration.label}</label>
+            <input type='text' id='bonitaUsername' name='bonitaUsername' placeholder='username'>
+        </div>
+        <div class="bonitaSettings">
+            <label for='password'>&{bonita.password.configuration.label}</label>
+            <input type='password' id='bonitaPassword' name='bonitaPassword' placeholder='******'>
+        </div>
+
+        <div class="buttonDiv">
+            <button type='button' class='btn btn-primary BonitaEditSettingsSaveButton'>&{bonita.save.configuration.label}</button>
+            <button type='button' class='btn BonitaEditSettingsCancelButton'>&{bonita.reset.configuration.label}</button>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    require( ["SHARED/jquery"], function ($)
+    {
+        $(".BonitaEditSettingsCancelButton").click(function(e) {
+            $("#bonitaSettingsForm")[0].reset();
+        });
+
+        $(".BonitaEditSettingsSaveButton").click(function(e) {
+            $("#bonitaSettingsForm").submit();
+        });
+    });
+</script>
+
+
+

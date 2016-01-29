@@ -1,0 +1,87 @@
+    <div id="TaskPortlet" class="uiBox uiTaskPortlet">
+        <h6 class='title center'>&{bonita.header.label}</h6>
+        <div class="uiTaskContent">
+            &{bonita.taskList.label} :
+            <ul id='taskList'></ul>
+        </div>
+        <div class="uiProcessContent">
+            &{bonita.processList.label} :
+            <ul id='processList'></ul>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        require(["SHARED/jquery"], function ($)
+        {
+
+            var bonitaUserInformationUrl = "${bonitaUrl}bonita/API/system/session/unusedid"
+            var bonitaTaskUrl = "${bonitaUrl}bonita/API/bpm/humanTask";
+            var bonitaProcessUrl = "${bonitaUrl}bonita/API/bpm/process?f=activationState%3dENABLED";
+
+
+            var bonitaUserName="";
+            var bonitaUserId="";
+
+            function getLogguedUserInformation () {
+                $.ajax({
+                    url: bonitaUserInformationUrl,
+                    dataType: "json",
+                    success : function(data, status){
+                        bonitaUserName=data.user_name;
+                        bonitaUserId=data.user_id;
+                        getTasks();
+                        getProcess();
+                    },
+                    error: function(data, status) {
+                        $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
+                    }
+                });
+            }
+
+            function getTasks() {
+                $.ajax({
+                    url: bonitaTaskUrl+"?f=assigned_id%3d"+bonitaUserId,
+                    dataType: "json",
+                    success : function(data, status){
+                        if (data.length==0) {
+                            $(".uiTaskContent").html("&{bonita.notask.label}");
+                        } else {
+                            for(var i = 0; i < data.length; i++) {
+                                var obj = data[i];
+                                $("#taskList").append("<li><a target='_blank' href='${bonitaUrl}bonita/portal/homepage#?id="+obj.id+"&_p=performTask&_pf=1'>"+obj.displayName+"</a></li>");
+                            }
+                        }
+                    },
+                    error: function(data, status) {
+                        $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
+
+                    }
+                });
+            }
+
+            function getProcess() {
+                $.ajax({
+                    url: bonitaProcessUrl+"&f=user_id%3d"+bonitaUserId,
+                    dataType: "json",
+                    success : function(data, status){
+                        if (data.length==0) {
+                            $(".uiProcessContent").html("");
+                        } else {
+                            for(var i = 0; i < data.length; i++) {
+                                var obj = data[i];
+                                $("#processList").append("<li><a target='_blank' href='${bonitaUrl}bonita/portal/form/process/"+obj.name+"/"+obj.version+"'>"+obj.displayName+"</a></li>");
+                            }
+                        }
+                    },
+                    error: function(data, status) {
+                        $(".uiProcessContent").html("");
+                    }
+                });
+            }
+
+            getLogguedUserInformation();
+        });
+
+    </script>
