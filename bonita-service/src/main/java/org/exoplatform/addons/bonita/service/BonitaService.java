@@ -12,16 +12,12 @@ import javax.inject.Inject;
 
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.utils.PropertyManager;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.UserProfile;
-import org.exoplatform.services.rest.impl.provider.InputStreamEntityProvider;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.social.service.rest.Util;
 import org.exoplatform.web.security.codec.AbstractCodec;
 import org.exoplatform.web.security.codec.AbstractCodecBuilder;
 import org.exoplatform.web.security.security.TokenServiceInitializationException;
