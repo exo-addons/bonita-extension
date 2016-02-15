@@ -8,6 +8,8 @@ Version 3.0.0 of this extension is design to work on PLF 4.3.0.
 Bonita version tested is 7.0.2 Community Edition. It should work without problem with enterprise version. It is also tested with Bonita 7.1.5. 
 Extension use Bonita Rest API to get user task list and process launchable by current user.
 
+If you need an example process, you can use this one https://github.com/Bonitasoft-Community/vacation-management-example, provided by Bonita.
+
 # Install the extension
 With PLF 4.3.0, you can install the extension with 
 	./addon install exo-bonita-extension
