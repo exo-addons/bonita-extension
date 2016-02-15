@@ -9,9 +9,7 @@ import org.exoplatform.services.log.Log;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 
 /**
  * Created by Romain Dénarié (romain.denarie@exoplatform.com) on 08/09/15.
@@ -49,10 +47,14 @@ public class BonitaTaskApplication {
       return index.with().set("bonitaUrl", bonitaService.getBonitaServerUrl()).ok();
     } else {
       if (!bonitaService.isConfigured(username)) {
-        String bonitaUrl = System.getProperty(bonitaService.USER_BONITA_SERVER_URL_ATTRIBUTE);
+        String bonitaUrl = bonitaService.getBonitaServerUrl();
         if (bonitaUrl == null)
           bonitaUrl = "";
-        return configuration.with().set("message", message).set("bonitaUrl", bonitaUrl).ok();
+        return configuration.with().
+                set("bonitaUrl", "").
+                set("bonitaLogin", "").
+                //set("bonitaPassword", "").
+                set("message", message).set("bonitaUrl", bonitaUrl).ok();
       } else {
         return indexNotSSO.with()
                           .set("bonitaUrl",
@@ -70,8 +72,20 @@ public class BonitaTaskApplication {
 
     String username = Request.getCurrent().getSecurityContext().getUserPrincipal().getName();
 
-    String url = bonitaServerName.endsWith("/") ? bonitaServerName : bonitaServerName + "/";
-    url += "bonita/loginservice?username=" + bonitaUsername + "&password=" + bonitaPassword + "&redirect=false";
+    try {
+      URL uri = new URL(bonitaServerName);
+      bonitaServerName = uri.getProtocol()+"://"+uri.getAuthority();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return BonitaTaskApplication_.index("Server url malformed.");
+    }
+
+
+    if (bonitaPassword.equals("")) {
+      bonitaPassword=BonitaService.decodePassword(bonitaService.getUserAttributeFromProfile(bonitaService.USER_BONITA_PASSWORD_ATTRIBUTE,username));
+    }
+
+    String url = bonitaServerName+"/bonita/loginservice?username=" + bonitaUsername + "&password=" + bonitaPassword + "&redirect=false";
 
     try {
       HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -96,5 +110,19 @@ public class BonitaTaskApplication {
     return BonitaTaskApplication_.index("Connexion Error");
 
   }
+
+  @View
+  public Response editSettings() {
+    String username = Request.getCurrent().getSecurityContext().getUserPrincipal().getName();
+
+    return configuration.with().
+            set("bonitaUrl", bonitaService.getUserAttributeFromProfile(bonitaService.USER_BONITA_SERVER_URL_ATTRIBUTE, username)).
+            set("bonitaLogin", bonitaService.getUserAttributeFromProfile(bonitaService.USER_BONITA_USERNAME_ATTRIBUTE,username)).
+            //set("bonitaPassword", bonitaService.getUserAttributeFromProfile(bonitaService.USER_BONITA_PASSWORD_ATTRIBUTE,username)).
+            set("message","").
+            ok();
+
+  }
+
 
 }

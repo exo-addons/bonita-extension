@@ -69,8 +69,13 @@ public class BonitaService implements ResourceContainer, Startable {
         this.useSSO = (System.getProperty(USER_BONITA_USE_SSO) != null && System.getProperty(USER_BONITA_USE_SSO).equals("true"));
         if (System.getProperty(USER_BONITA_SERVER_URL_ATTRIBUTE)!=null) {
             this.bonitaServerUrl=System.getProperty(USER_BONITA_SERVER_URL_ATTRIBUTE);
-            this.bonitaServerUrl = this.bonitaServerUrl.endsWith("/") ? this.bonitaServerUrl : this.bonitaServerUrl + "/";
-
+            try {
+                URL uri = new URL(this.bonitaServerUrl);
+                this.bonitaServerUrl = uri.getProtocol()+"://"+uri.getAuthority();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                this.bonitaServerUrl=null;
+            }
         }
 
         if (this.useSSO && this.bonitaServerUrl == null) {
@@ -125,6 +130,9 @@ public class BonitaService implements ResourceContainer, Startable {
 
         if (userId == null) {
             return Response.status(HTTPStatus.INTERNAL_ERROR).build();
+        }
+        if (result.equals("")) {
+            return Response.status(HTTPStatus.NOT_FOUND).build();
         }
 
         return renderJSON(result);
@@ -388,7 +396,7 @@ public class BonitaService implements ResourceContainer, Startable {
         }
     }
 
-    private static String decodePassword(String password) {
+    public static String decodePassword(String password) {
         try {
             if (codec == null) {
                 initCodec();
@@ -400,7 +408,7 @@ public class BonitaService implements ResourceContainer, Startable {
         return password;
     }
 
-    private static String encodePassword(String password) {
+    public static String encodePassword(String password) {
         try {
             if (codec == null) {
                 initCodec();

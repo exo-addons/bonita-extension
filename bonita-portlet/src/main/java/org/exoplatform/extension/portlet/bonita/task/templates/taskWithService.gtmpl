@@ -8,7 +8,12 @@
             &{bonita.processList.label} :
             <ul id='processList'></ul>
         </div>
+        <div class="buttonDiv">
+            <a class="btn btnEditSettings btn-primary" title="&{bonita.edit.configuration.label}" href="@{BonitaTaskApplication.editSettings()}">
+                &{bonita.edit.configuration.label}
+            </a>
 
+        </div>
     </div>
 
 
@@ -34,6 +39,7 @@
                 },
                 error: function(data, status) {
                     $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
+                    $(".uiProcessContent").hide();
 
                 }
             });
@@ -53,6 +59,10 @@
                 error: function(data, status) {
                     $(".uiProcessContent").html("");
                 }
+            });
+
+            $("#BonitaEditSettingsButton").click(function () {
+
             });
 
         });

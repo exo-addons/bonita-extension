@@ -19,7 +19,7 @@
 }
 
 
-.uiTaskPortlet form .buttonDiv {
+.uiTaskPortlet .buttonDiv {
     text-align: center;
     margin: 15px 0;
 }
@@ -37,3 +37,4 @@
     list-style: disc;
     margin-left:20px;
 }
+

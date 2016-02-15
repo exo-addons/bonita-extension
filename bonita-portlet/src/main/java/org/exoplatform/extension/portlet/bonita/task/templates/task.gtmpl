@@ -16,9 +16,9 @@
         require(["SHARED/jquery"], function ($)
         {
 
-            var bonitaUserInformationUrl = "${bonitaUrl}bonita/API/system/session/unusedid"
-            var bonitaTaskUrl = "${bonitaUrl}bonita/API/bpm/humanTask";
-            var bonitaProcessUrl = "${bonitaUrl}bonita/API/bpm/process?f=activationState%3dENABLED";
+            var bonitaUserInformationUrl = "${bonitaUrl}/bonita/API/system/session/unusedid"
+            var bonitaTaskUrl = "${bonitaUrl}/bonita/API/bpm/humanTask";
+            var bonitaProcessUrl = "${bonitaUrl}/bonita/API/bpm/process?f=activationState%3dENABLED";
 
 
             var bonitaUserName="";
@@ -36,6 +36,8 @@
                     },
                     error: function(data, status) {
                         $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
+                        $(".uiProcessContent").hide();
+
                     }
                 });
             }
@@ -50,7 +52,7 @@
                         } else {
                             for(var i = 0; i < data.length; i++) {
                                 var obj = data[i];
-                                $("#taskList").append("<li><a target='_blank' href='${bonitaUrl}bonita/portal/homepage#?id="+obj.id+"&_p=performTask&_pf=1'>"+obj.displayName+"</a></li>");
+                                $("#taskList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/homepage#?id="+obj.id+"&_p=performTask&_pf=1'>"+obj.displayName+"</a></li>");
                             }
                         }
                     },
@@ -71,7 +73,7 @@
                         } else {
                             for(var i = 0; i < data.length; i++) {
                                 var obj = data[i];
-                                $("#processList").append("<li><a target='_blank' href='${bonitaUrl}bonita/portal/form/process/"+obj.name+"/"+obj.version+"'>"+obj.displayName+"</a></li>");
+                                $("#processList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/form/process/"+obj.name+"/"+obj.version+"'>"+obj.displayName+"</a></li>");
                             }
                         }
                     },
