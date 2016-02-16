@@ -9,7 +9,11 @@
             <ul id='processList'></ul>
         </div>
         <div class="buttonDiv">
-            <a class="btn btnEditSettings btn-primary" title="&{bonita.edit.configuration.label}" href="@{BonitaTaskApplication.editSettings()}">
+            <a class="btn btnRefresh btn-primary" id="btnRefresh" title="&{bonita.refresh.label}">
+                &{bonita.refresh.label}
+            </a>
+
+            <a class="btn btnEditSettings" title="&{bonita.edit.configuration.label}" href="@{BonitaTaskApplication.editSettings()}">
                 &{bonita.edit.configuration.label}
             </a>
 
@@ -24,45 +28,52 @@
             var bonitaTaskUrl = "/rest/bonitaService/getTasks";
             var bonitaProcessUrl = "/rest/bonitaService/getProcess";
 
-            $.ajax({
-                url: bonitaTaskUrl,
-                dataType: "json",
-                success : function(data, status){
-                    if (data.length==0) {
-                        $(".uiTaskContent").html("&{bonita.notask.label}");
-                    } else {
-                        for(var i = 0; i < data.length; i++) {
-                            var obj = data[i];
-                            $("#taskList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/homepage#?id="+obj.id+"&_p=performTask&_pf=1'>"+obj.displayName+"</a></li>");
-                        }
-                    }
-                },
-                error: function(data, status) {
-                    $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
-                    $(".uiProcessContent").hide();
 
-                }
-            });
-            $.ajax({
-                url: bonitaProcessUrl,
-                dataType: "json",
-                success : function(data, status){
-                    if (data.length==0) {
+            function getDatas() {
+                $("#taskList").html("");
+                $("#processList").html("");
+                $.ajax({
+                    url: bonitaTaskUrl,
+                    dataType: "json",
+                    success : function(data, status){
+                        if (data.length==0) {
+                            $(".uiTaskContent").html("&{bonita.notask.label}");
+                        } else {
+                            for(var i = 0; i < data.length; i++) {
+                                var obj = data[i];
+                                $("#taskList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/homepage#?id="+obj.id+"&_p=performTask&_pf=1'>"+obj.displayName+"</a></li>");
+                            }
+                        }
+                    },
+                    error: function(data, status) {
+                        $(".uiTaskContent").html("&{bonita.unauthorizedError.label}");
+                        $(".uiProcessContent").hide();
+
+                    }
+                });
+                $.ajax({
+                    url: bonitaProcessUrl,
+                    dataType: "json",
+                    success : function(data, status){
+                        if (data.length==0) {
+                            $(".uiProcessContent").html("");
+                        } else {
+                            for(var i = 0; i < data.length; i++) {
+                                var obj = data[i];
+                                $("#processList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/form/process/"+obj.name+"/"+obj.version+"'>"+obj.displayName+"</a></li>");
+                            }
+                        }
+                    },
+                    error: function(data, status) {
                         $(".uiProcessContent").html("");
-                    } else {
-                        for(var i = 0; i < data.length; i++) {
-                            var obj = data[i];
-                            $("#processList").append("<li><a target='_blank' href='${bonitaUrl}/bonita/portal/form/process/"+obj.name+"/"+obj.version+"'>"+obj.displayName+"</a></li>");
-                        }
                     }
-                },
-                error: function(data, status) {
-                    $(".uiProcessContent").html("");
-                }
-            });
+                });
+            }
 
-            $("#BonitaEditSettingsButton").click(function () {
+            getDatas();
 
+            $("#btnRefresh").click(function () {
+                getDatas();
             });
 
         });

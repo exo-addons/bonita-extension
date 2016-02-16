@@ -9,6 +9,13 @@
             <ul id='processList'></ul>
         </div>
 
+        <div class="buttonDiv">
+            <a class="btn btnRefresh btn-primary" id="btnRefresh" title="&{bonita.refresh.label}">
+                &{bonita.refresh.label}
+            </a>
+
+        </div>
+
     </div>
 
 
@@ -25,6 +32,8 @@
             var bonitaUserId="";
 
             function getLogguedUserInformation () {
+                $("#taskList").html("");
+                $("#processList").html("");
                 $.ajax({
                     url: bonitaUserInformationUrl,
                     dataType: "json",
@@ -84,6 +93,10 @@
             }
 
             getLogguedUserInformation();
+
+            $("#btnRefresh").click(function () {
+                getLogguedUserInformation();
+            });
         });
 
     </script>
