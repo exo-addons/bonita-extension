@@ -31,9 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.KeyStore;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by Romain Dénarié (romain.denarie@exoplatform.com) on 08/09/15.
@@ -102,20 +100,21 @@ public class BonitaService implements ResourceContainer, Startable {
             userBonitaLogin=userProfile.getAttribute(USER_BONITA_USERNAME_ATTRIBUTE);
             userBonitaPassword=decodePassword(userProfile.getAttribute(USER_BONITA_PASSWORD_ATTRIBUTE));
 
-            String cookie = loginBonita(userBonitaUrl,userBonitaLogin,userBonitaPassword);
-            String bonitaUserId = getBonitaUserId(userBonitaUrl,cookie);
+            List<String> cookies = loginBonita(userBonitaUrl,userBonitaLogin,userBonitaPassword);
+            String bonitaUserId = getBonitaUserId(userBonitaUrl,cookies);
             url = userBonitaUrl+"/bonita/API/bpm/humanTask?f=assigned_id%3d"+bonitaUserId;
 
 
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("Cookie", cookie);
-            int responseCode = connection.getResponseCode();
+            for (String cookie : cookies) {
+                connection.addRequestProperty("Cookie", cookie.split(";", 2)[0]);
+            }            int responseCode = connection.getResponseCode();
             if (responseCode == 200  || responseCode == 201) {
                 result= getStringFromInputStream(connection.getInputStream());
             }
 
-            logoutBonita(userBonitaUrl,cookie);
+            logoutBonita(userBonitaUrl,cookies);
 
         } catch (MalformedURLException e) {
             LOG.error(url + "is malFormed");
@@ -125,6 +124,7 @@ public class BonitaService implements ResourceContainer, Startable {
             e.printStackTrace();
         } catch (Exception e) {
             LOG.error("Unable to get user information");
+            e.printStackTrace();
         }
 
 
@@ -156,20 +156,22 @@ public class BonitaService implements ResourceContainer, Startable {
             userBonitaLogin=userProfile.getAttribute(USER_BONITA_USERNAME_ATTRIBUTE);
             userBonitaPassword=decodePassword(userProfile.getAttribute(USER_BONITA_PASSWORD_ATTRIBUTE));
 
-            String cookie = loginBonita(userBonitaUrl,userBonitaLogin,userBonitaPassword);
-            String bonitaUserId = getBonitaUserId(userBonitaUrl,cookie);
+            List<String> cookies = loginBonita(userBonitaUrl,userBonitaLogin,userBonitaPassword);
+            String bonitaUserId = getBonitaUserId(userBonitaUrl,cookies);
             url = userBonitaUrl+"/bonita/API/bpm/process?f=activationState%3dENABLED&f=user_id%3d"+bonitaUserId;
 
 
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("Cookie", cookie);
+            for (String cookie : cookies) {
+                connection.addRequestProperty("Cookie", cookie.split(";", 2)[0]);
+            }
             int responseCode = connection.getResponseCode();
             if (responseCode == 200  || responseCode == 201) {
                 result= getStringFromInputStream(connection.getInputStream());
             }
 
-            logoutBonita(userBonitaUrl,cookie);
+            logoutBonita(userBonitaUrl,cookies);
 
         } catch (MalformedURLException e) {
             LOG.error(url + "is malFormed");
@@ -179,6 +181,7 @@ public class BonitaService implements ResourceContainer, Startable {
             e.printStackTrace();
         } catch (Exception e) {
             LOG.error("Unable to get user information");
+            e.printStackTrace();
         }
 
 
@@ -190,12 +193,14 @@ public class BonitaService implements ResourceContainer, Startable {
 
     }
 
-    private void logoutBonita(String userBonitaUrl,String cookie) {
+    private void logoutBonita(String userBonitaUrl,List<String> cookies) {
         String url=userBonitaUrl+"/bonita/logoutservice";
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("Cookie", cookie);
+            for (String cookie : cookies) {
+                connection.addRequestProperty("Cookie", cookie.split(";", 2)[0]);
+            }
             int responseCode = connection.getResponseCode();
         } catch (MalformedURLException e) {
             LOG.error(url + "is malFormed");
@@ -211,13 +216,14 @@ public class BonitaService implements ResourceContainer, Startable {
     
     }
 
-    private String getBonitaUserId(String userBonitaUrl, String cookie) {
+    private String getBonitaUserId(String userBonitaUrl, List<String> cookies) {
         String url=userBonitaUrl+"/bonita/API/system/session/unusedid";
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("Cookie", cookie);
-            int responseCode = connection.getResponseCode();
+            for (String cookie : cookies) {
+                connection.addRequestProperty("Cookie", cookie.split(";", 2)[0]);
+            }            int responseCode = connection.getResponseCode();
             if (responseCode == 200  || responseCode == 201) {
                 JSONObject json = new JSONObject(getStringFromInputStream(connection.getInputStream()));
                 return (String)json.get("user_id");
@@ -248,14 +254,14 @@ public class BonitaService implements ResourceContainer, Startable {
         return sb.toString();
     }
 
-    private String loginBonita(String userBonitaUrl, String userBonitaLogin, String userBonitaPassword) {
+    private List<String> loginBonita(String userBonitaUrl, String userBonitaLogin, String userBonitaPassword) {
         String url=userBonitaUrl+"/bonita/loginservice?username="+userBonitaLogin+"&password="+userBonitaPassword+"&redirect=false";
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("POST");
             int responseCode = connection.getResponseCode();
             if (responseCode == 200  || responseCode == 201) {
-                String cookie = connection.getHeaderField("Set-Cookie");
+                List<String> cookie = connection.getHeaderFields().get("Set-Cookie");
                 return cookie;
             }
         } catch (MalformedURLException e) {
@@ -265,7 +271,7 @@ public class BonitaService implements ResourceContainer, Startable {
             LOG.error("IOException on "+url);
             e.printStackTrace();
         }
-        return "";
+        return new ArrayList<String>();
 
     }
 
@@ -316,6 +322,7 @@ public class BonitaService implements ResourceContainer, Startable {
             organizationService.getUserProfileHandler().saveUserProfile(userProfile, false);
         } catch (Exception e) {
             LOG.error("Unable to store user information");
+            e.printStackTrace();
         }
     }
 
@@ -434,6 +441,7 @@ public class BonitaService implements ResourceContainer, Startable {
             return profile.getAttribute(attribute);
         } catch (Exception e) {
             LOG.error("Unable to get user information");
+            e.printStackTrace();
         }
         return "";
     }
