@@ -4,7 +4,7 @@
   <parent>
     <artifactId>bonita-extension</artifactId>
     <groupId>org.exoplatform.addons.bonita</groupId>
-    <version>3.1.0</version>
+    <version>3.1.1-SNAPSHOT</version>
   </parent>
   <artifactId>bonita-extension-portlets</artifactId>
   <packaging>war</packaging>
