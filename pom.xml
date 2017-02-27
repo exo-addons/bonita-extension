@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.exoplatform.addons.bonita</groupId>
   <artifactId>bonita-extension</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.1.0</version>
   <packaging>pom</packaging>
   <modules>
     <module>bonita-service</module>
@@ -19,6 +19,7 @@
     <connection>scm:git:git://github.com/exo-addons/bonita-extension.git</connection>
     <developerConnection>scm:git:git@github.com:exo-addons/bonita-extension.git</developerConnection>
     <url>https://github.com/exo-addons/bonita-extension</url>
+    <tag>3.1.0</tag>
   </scm>
   <properties>
     <exoplatform.version>4.4.0</exoplatform.version>
