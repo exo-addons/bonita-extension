@@ -22,12 +22,15 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
+import com.thoughtworks.xstream.converters.ConversionException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,6 +66,7 @@ public class BonitaService implements ResourceContainer {
 	public static final String REST_PASS = System.getProperty("org.exoplatform.bonita.systempassword", "restbpm").trim();
 	public static final int PORT = Integer.parseInt(System.getProperty("org.exoplatform.bonita.port", "8080").trim());
 	public static final String HOST = System.getProperty("org.exoplatform.bonita.host", "localhost").trim();
+	public static final String HOME_PAGE = System.getProperty("org.exoplatform.bonita.home", "/bonita/console/homepage").trim();
 	private static final String DEFAULT_USER_PASSWORD = System.getProperty("org.exoplatform.bonita.default.password", "!p@ssw0rd!").trim();
 	private static final String DEFAULT_GROUP = System.getProperty("org.exoplatform.bonita.default.group", "consulting").trim();
 	private static final String DEFAULT_ROLE = System.getProperty("org.exoplatform.bonita.default.role", "member").trim();
@@ -115,7 +119,7 @@ public class BonitaService implements ResourceContainer {
 
 			List<ExoProcessDeploymentInfo> eXoProcess = new ArrayList<ExoProcessDeploymentInfo>();
 			for (ProcessDeploymentInfo pdi : process) {
-				eXoProcess.add(new ExoProcessDeploymentInfo(pdi, HOST, PORT,username));
+				eXoProcess.add(new ExoProcessDeploymentInfo(pdi, HOST, PORT,HOME_PAGE,username));
 			}
 
 			DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -238,6 +242,7 @@ public class BonitaService implements ResourceContainer {
 				logger.debug("User "+username+" does'nt exist in Bonita => add it");
 			}
 			addUser=true;
+			//com.thoughtworks.xstream.converters.ConversionException:
 		} catch (InvalidSessionException e) {
 			//this catch error when session is not ok (for example bonita server has restart without exo restart
 			//so create a new session and return getUser
@@ -246,6 +251,13 @@ public class BonitaService implements ResourceContainer {
 
 
 		}
+		 catch (ConversionException e) {
+				if (logger.isDebugEnabled()) {
+					logger.debug("User "+username+" does'nt exist in Bonita => add it");
+				}
+				addUser=true;
+				//com.thoughtworks.xstream.converters.ConversionException:
+			}
 
 		if (addUser) {
 			String firstname="";

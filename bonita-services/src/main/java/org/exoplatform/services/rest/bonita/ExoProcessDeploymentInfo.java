@@ -15,6 +15,7 @@ public class ExoProcessDeploymentInfo {
 	private String host;
 
 	private int port;
+	private String home;
 
 	//This class stores a ProcessDeploymentInfo object
 	//and extract all information which are Long to transform it to String
@@ -51,13 +52,14 @@ public class ExoProcessDeploymentInfo {
 	}
 
 
-	public ExoProcessDeploymentInfo(ProcessDeploymentInfo pdi, String host, int port, String username) {
+	public ExoProcessDeploymentInfo(ProcessDeploymentInfo pdi, String host, int port,String home, String username) {
 		this.processId=String.valueOf(pdi.getProcessId());
 		this.deployedBy=String.valueOf(pdi.getDeployedBy());
 		this.username=username;
 		this.processDeploymentInfo=pdi;
 		this.host = host;
 		this.port = port;
+		this.setHome(home);
 
 	}
 
@@ -83,5 +85,13 @@ public class ExoProcessDeploymentInfo {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getHome() {
+		return home;
+	}
+
+	public void setHome(String home) {
+		this.home = home;
 	}
 }
